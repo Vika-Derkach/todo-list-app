@@ -14,6 +14,17 @@
           "realization": "dao/JokesInstanceMongo"
         }
       }
+    },
+    "binary": {
+      "type": "uuAppBinaryStore",
+      "realization": "MongoDB",
+      "schemaMap": {
+        "uuBinary": {
+          "realization": "uu_appg01_binarystore-cmd:dao/UuAppBinarystoreMongo",
+          "maxNoi": 100,
+          "maxSob": 104857600
+        }
+      }
     }
   }
 }

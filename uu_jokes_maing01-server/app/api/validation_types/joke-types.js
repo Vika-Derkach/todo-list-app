@@ -2,6 +2,7 @@
 const jokeCreateDtoInType = shape({
   name: uu5String(255).isRequired(),
   text: uu5String(4000),
+  image: binary().isRequired(),
 });
 const jokeGetDtoInType = shape({
   id: id().isRequired(),

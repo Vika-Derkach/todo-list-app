@@ -20,6 +20,13 @@ const Create = {
       this.message = "Create joke by joke DAO create failed.";
     }
   },
+  CreateBinaryFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Create.UC_CODE}uuBinaryDaoCreateFailed`;
+      this.message = "Update joke by joke Dao update failed.";
+    }
+  },
 };
 
 const Get = {

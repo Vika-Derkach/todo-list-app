@@ -4,6 +4,7 @@ const { Validator } = require("uu_appg01_server").Validation;
 const { DaoFactory } = require("uu_appg01_server").ObjectStore;
 const { ValidationHelper } = require("uu_appg01_server").AppServer;
 const Errors = require("../api/errors/joke-error.js");
+const BinaryAbl = require("uu_appg01_binarystore-cmd").UuBinaryAbl;
 
 const WARNINGS = {
   createUnsupportedKeys: {
@@ -227,20 +228,35 @@ class JokeAbl {
       WARNINGS.createUnsupportedKeys.code,
       Errors.Create.InvalidDtoIn
     );
-    //2.4.Adds keys and values from Added Values table to dtoIn object.
     dtoIn = {
       ...dtoIn,
+
       averageRating: 0,
       ratingCount: 0,
       visibility: false,
       uuIdentity: "uuIdentity of logged user",
       uuIdentityName: "name and surname of logged user",
     };
-    let dtoOut;
+    const { image, ...restDtoIn } = dtoIn;
+    let userPic = null;
+
+    try {
+      userPic = await BinaryAbl.createBinary(awid, { data: image });
+    } catch (e) {
+      throw new Errors.Create.CreateBinaryFailed({ uuAppErrorMap }, e);
+    }
+    const uuObject = {
+      awid,
+      userPicCode: userPic.code,
+      ...restDtoIn,
+    };
+    //2.4.Adds keys and values from Added Values table to dtoIn object.
+
+    let dtoOut = null;
 
     //5.Creates the joke
     try {
-      dtoOut = await this.dao.create({ ...dtoIn, awid });
+      dtoOut = await this.dao.create(uuObject);
     } catch (e) {
       throw new Errors.Create.JokeDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
     }
