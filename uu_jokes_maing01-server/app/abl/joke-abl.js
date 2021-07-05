@@ -66,7 +66,7 @@ class JokeAbl {
       Errors.Update.InvalidDtoIn
     );
     // HDS 3
-    //find з бази данних
+
     let joke = await this.dao.get(awid, dtoIn.id);
     if (!joke) throw new Errors.Update.JokeDoesNotExist(uuAppErrorMap, { dtoIn });
     let obj = { ...joke, ...dtoIn };
@@ -80,6 +80,29 @@ class JokeAbl {
       throw new Errors.Update.UserNotAuthorized({ uuAppErrorMap });
     }
 
+    //Binary
+    if (dtoIn.jokePicCode) {
+      let binary;
+      if (!joke.jokePicCode) {
+        try {
+          binary = await UuBinaryAbl.createBinary(awid, { data: dtoIn.jokePicCode });
+        } catch (e) {
+          throw new Errors.Update.UuBinaryCreateFailed({ uuAppErrorMap }, e);
+        }
+      } else {
+        try {
+          binary = await UuBinaryAbl.updateBinaryData(awid, {
+            data: dtoIn.jokePicCode,
+            code: joke.jokePicCode,
+            revisionStrategy: "NONE",
+          });
+        } catch (e) {
+          throw new Errors.Update.UuBinaryUpdateBinaryDataFailed({ uuAppErrorMap }, e);
+        }
+      }
+      dtoIn.jokePicCode = binary.code;
+    }
+    /////////////////////////////
     try {
       // HDS 7
       dtoOut = await this.dao.update(obj);
@@ -117,6 +140,16 @@ class JokeAbl {
     if (!joke) {
       throw new Errors.Delete.JokeDoesNotExist({ uuAppErrorMap }, { jokeId: dtoIn.id });
     }
+    /////////////////////
+
+    if (joke.jokePicCode) {
+      try {
+        await BinaryAbl.deleteBinary(awid, { code: joke.jokePicCode });
+      } catch (e) {
+        throw new Errors.Delete.BinaryDaoDeleteByCodeFailed({ uuAppErrorMap }, e);
+      }
+    }
+    ///////////////////
 
     // HDS 4,
     if (
@@ -199,10 +232,23 @@ class JokeAbl {
       WARNINGS.getUnsupportedKeys.code,
       Errors.Get.InvalidDtoIn
     );
+
     //HDS 3
-    let dtoOut = await this.dao.get(awid, dtoIn.id);
-    //HDS 4
-    return { ...dtoOut, uuAppErrorMap };
+    let joke = await this.dao.get(awid, dtoIn.id);
+    // let dtoOut = await this.dao.get(uuObject);
+
+    //Binary
+    let binaryImage = {};
+    if (joke.jokePicCode) {
+      try {
+        binaryImage = await BinaryAbl.getBinary(awid, { code: joke.jokePicCode });
+      } catch (e) {
+        throw new Errors.Get.BinaryDoesNotExist({ uuAppErrorMap }, e);
+      }
+    }
+    //////////
+
+    return { ...joke, ...binaryImage, uuAppErrorMap };
   }
 
   async create(awid, dtoIn, uuAppErrorMap = {}) {
@@ -237,19 +283,21 @@ class JokeAbl {
       uuIdentity: "uuIdentity of logged user",
       uuIdentityName: "name and surname of logged user",
     };
+    //Binary
     const { image, ...restDtoIn } = dtoIn;
-    let userPic = null;
+    let jokePic = null;
 
     try {
-      userPic = await BinaryAbl.createBinary(awid, { data: image });
+      jokePic = await BinaryAbl.createBinary(awid, { data: image });
     } catch (e) {
       throw new Errors.Create.CreateBinaryFailed({ uuAppErrorMap }, e);
     }
     const uuObject = {
       awid,
-      userPicCode: userPic.code,
+      jokePicCode: jokePic.code,
       ...restDtoIn,
     };
+    //////
     //2.4.Adds keys and values from Added Values table to dtoIn object.
 
     let dtoOut = null;

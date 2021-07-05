@@ -46,6 +46,20 @@ const Get = {
       this.message = "Joke does not exist.";
     }
   },
+  BinaryDoesNotExist: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Get.UC_CODE}uuBinaryDoesNotExist`;
+      this.message = "Object uuBinary does not exist.";
+    }
+  },
+  // uuBinaryDoesNotExist: class extends JokesMainUseCaseError {
+  //   constructor() {
+  //     super(...arguments);
+  //     this.code = `${Get.UC_CODE}uuBinaryDoesNotExist`;
+  //     this.message = "	Object uuBinary does not exist.";
+  //   }
+  // },
 };
 const Instance = {
   UC_CODE: `${JOKE_ERROR_PREFIX}instance/`,
@@ -105,6 +119,13 @@ const Delete = {
       this.message = "User not authorized.";
     }
   },
+  BinaryDaoDeleteByCodeFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Delete.UC_CODE}uuBinaryDaoDeleteByCodeFailed`;
+      this.message = "Delete uuBinary by uuBinary DAO deleteByCode failed.";
+    }
+  },
 };
 
 const Update = {
@@ -128,6 +149,27 @@ const Update = {
       super(...arguments);
       this.code = `${Update.UC_CODE}jokeDoesNotExist`;
       this.message = "Joke does not exist.";
+    }
+  },
+  JokeDaoUpdateFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}jokeDaoUpdateFailed`;
+      this.message = "Update joke by joke Dao update failed.";
+    }
+  },
+  UuBinaryCreateFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}uuBinaryCreateFailed`;
+      this.message = "Creating uuBinary failed.";
+    }
+  },
+  UuBinaryUpdateBinaryDataFailed: class extends JokesMainUseCaseError {
+    constructor() {
+      super(...arguments);
+      this.code = `${Update.UC_CODE}uuBinaryUpdateBinaryDataFailed`;
+      this.message = "Updating uuBinary data failed.";
     }
   },
   JokeDaoUpdateFailed: class extends JokesMainUseCaseError {

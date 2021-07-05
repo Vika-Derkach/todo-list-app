@@ -3,9 +3,11 @@ const jokeCreateDtoInType = shape({
   name: uu5String(255).isRequired(),
   text: uu5String(4000),
   image: binary().isRequired(),
+  code: code().isRequired(),
 });
 const jokeGetDtoInType = shape({
   id: id().isRequired(),
+  // code: code().isRequired(),
 });
 const jokeListDtoInType = shape({
   sortBy: oneOf(["name", "rating"]),
@@ -23,4 +25,6 @@ const jokeUpdateDtoInType = shape({
   id: id().isRequired(),
   name: uu5String(255),
   text: uu5String(4000),
+  image: binary().isRequired(),
+  code: code().isRequired(),
 });
