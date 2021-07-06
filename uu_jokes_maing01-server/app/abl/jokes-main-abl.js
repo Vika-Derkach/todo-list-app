@@ -36,7 +36,7 @@ class JokesMainAbl {
     );
 
     // HDS 2
-    const schemas = ["jokesMain"];
+    const schemas = ["jokesMain", "joke"];
     let schemaCreateResults = schemas.map(async (schema) => {
       try {
         return await DaoFactory.getDao(schema).createSchema();

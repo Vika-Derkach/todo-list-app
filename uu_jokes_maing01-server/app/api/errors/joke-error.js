@@ -24,7 +24,7 @@ const Create = {
     constructor() {
       super(...arguments);
       this.code = `${Create.UC_CODE}uuBinaryDaoCreateFailed`;
-      this.message = "Update joke by joke Dao update failed.";
+      this.message = "Create joke by joke Dao update failed.";
     }
   },
 };

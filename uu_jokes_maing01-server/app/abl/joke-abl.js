@@ -254,6 +254,7 @@ class JokeAbl {
   async create(awid, dtoIn, uuAppErrorMap = {}) {
     //1.Loads the jokesInstance uuObject from the uuAppObjectStore through the jokesInstance DAO method getByAwid.
     const jokesInstance = await this.daoMain.getByAwid(awid);
+    console.log("testfds");
 
     //1.1.Checks if jokesInstance is not in the Closed state.
     if (jokesInstance.state !== "active") {
@@ -266,7 +267,9 @@ class JokeAbl {
     //2.Performs a logical check of dtoIn.
 
     //2.1.Calls the validate method on dtoIn according to dtoInType and fills validationResult with it.
+
     let validationResult = this.validator.validate("jokeCreateDtoInType", dtoIn);
+    console.log(dtoIn);
     //2.2.Checks whether dtoIn contains keys beyond the scope of dtoInType.
     uuAppErrorMap = ValidationHelper.processValidationResult(
       dtoIn,
@@ -274,30 +277,37 @@ class JokeAbl {
       WARNINGS.createUnsupportedKeys.code,
       Errors.Create.InvalidDtoIn
     );
-    dtoIn = {
-      ...dtoIn,
-
+    console.log("validate3");
+    //Binary
+    const { image, ...restDtoIn } = {
       averageRating: 0,
       ratingCount: 0,
       visibility: false,
       uuIdentity: "uuIdentity of logged user",
       uuIdentityName: "name and surname of logged user",
+      ...dtoIn,
     };
-    //Binary
-    const { image, ...restDtoIn } = dtoIn;
     let jokePic = null;
-
-    try {
-      jokePic = await BinaryAbl.createBinary(awid, { data: image });
-    } catch (e) {
-      throw new Errors.Create.CreateBinaryFailed({ uuAppErrorMap }, e);
+    console.log({ dtoIn });
+    if (image) {
+      try {
+        jokePic = await BinaryAbl.createBinary(awid, { data: image });
+      } catch (e) {
+        console.log({ errsdf: JSON.stringify(e.paramMap) });
+        throw new Errors.Create.CreateBinaryFailed({ uuAppErrorMap }, e);
+      }
     }
+    //   const uuObject = {
+    //     awid,
+    //     jokePicCode: jokePic.code,
+    //     ...restDtoIn,
+    //   };
+    // }
     const uuObject = {
       awid,
-      jokePicCode: jokePic.code,
+      jokePicCode: jokePic?.code,
       ...restDtoIn,
     };
-    //////
     //2.4.Adds keys and values from Added Values table to dtoIn object.
 
     let dtoOut = null;
@@ -306,10 +316,14 @@ class JokeAbl {
     try {
       dtoOut = await this.dao.create(uuObject);
     } catch (e) {
+      console.log({ efdfd: e });
       throw new Errors.Create.JokeDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
     }
 
     return { ...dtoOut, uuAppErrorMap };
+    // }
+
+    //////
   }
 }
 
