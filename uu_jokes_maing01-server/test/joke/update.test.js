@@ -49,7 +49,7 @@ describe(`Testing ${useCase} uuCmd...`, () => {
     const errorCode = "uu-jokes-main/joke/update/unsupportedKeys";
 
     const result = await TestHelper.executePostCommand(useCase, dtoIn, session);
-    console.log(result);
+
     expect(result.status).toEqual(200);
     expect(result.data.uuAppErrorMap).toBeDefined();
     expect(result.data.uuAppErrorMap[errorCode]).toBeDefined();

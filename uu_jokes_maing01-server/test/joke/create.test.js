@@ -42,7 +42,7 @@ describe(`Testing ${useCase} uuCmd...`, () => {
     const errorCode = "uu-jokes-main/joke/create/unsupportedKeys";
 
     const result = await TestHelper.executePostCommand(useCase, dtoIn, session);
-    console.log(result);
+
     expect(result.status).toEqual(200);
     expect(result.data.uuAppErrorMap).toBeDefined();
     expect(result.data.uuAppErrorMap[errorCode]).toBeDefined();
@@ -86,5 +86,17 @@ describe(`Testing ${useCase} uuCmd...`, () => {
       expect(e.code).toEqual(errorCode);
       expect(e.dtoOut.uuAppErrorMap).toBeDefined();
     }
+  });
+  test("Everything is good", async () => {
+    let session = await TestHelper.login("AwidLicenseOwner", false, false);
+    const dtoIn = {
+      name: "vika",
+      text: "is",
+      code: "some_code9",
+    };
+    const { data } = await TestHelper.executePostCommand(useCase, dtoIn, session);
+
+    expect(data.code).toEqual("some_code9");
+    expect(typeof data.id).toEqual("string");
   });
 });
