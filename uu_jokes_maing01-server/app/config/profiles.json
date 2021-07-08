@@ -1,10 +1,10 @@
 {
   "{asid}": {
-    "profileList": ["AsidAuthorities", "AsidExecutives", "AsidLicenseOwner", "Public"],
+    "profileList": ["AsidAuthorities","AsidExecutives","AsidLicenseOwner","Public"],
     "useCaseMap": {}
   },
   "*": {
-    "profileList": ["Authorities", "Executives", "AwidLicenseOwner", "Public", "AwidOwner", "Readers"],
+    "profileList": ["Authorities","Executives","AwidLicenseOwner","Public","AwidOwner","Readers"],
     "useCaseMap": {
       "sys/uuAppWorkspace/init": {
         "sysStateList": ["created"],
@@ -15,27 +15,27 @@
       },
       "sys/uuAppWorkspace/initUve": {
         "sysStateList": ["created"],
-        "profileList": ["Public", "AwidLicenseOwner"]
+        "profileList": ["Public","AwidLicenseOwner"]
       },
       "joke/create": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities", "Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "joke/get": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities", "Executives", "Readers"]
+        "profileList": ["Authorities","Executives","Readers"]
       },
       "joke/list": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities", "Executives", "Readers"]
+        "profileList": ["Authorities","Executives","Readers"]
       },
       "joke/delete": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities", "Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "joke/update": {
         "sysStateList": ["active"],
-        "profileList": ["Authorities", "Executives"]
+        "profileList": ["Authorities","Executives"]
       },
       "uu-app-binarystore/createBinary": {
         "sysStateList": ["active"],
@@ -58,6 +58,50 @@
         "profileList": ["Public"]
       },
       "uu-app-binarystore/getBinaryData": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "list/list": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/create": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/get": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/update": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/complete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/delete": {
+        "sysStateList": ["active"],
+        "profileList": ["Public"]
+      },
+      "item/list": {
         "sysStateList": ["active"],
         "profileList": ["Public"]
       }

@@ -12,6 +12,12 @@
         },
         "jokesInstance": {
           "realization": "dao/JokesInstanceMongo"
+        },
+        "list": {
+          "realization": "dao/ListMongo"
+        },
+        "item": {
+          "realization": "dao/ItemMongo"
         }
       }
     },
