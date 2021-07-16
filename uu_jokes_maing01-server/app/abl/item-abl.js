@@ -54,6 +54,8 @@ class ItemAbl {
       Errors.List.InvalidDtoIn
     );
     // HDS 1.4.
+    // TODO rev use let { pageInfo } - cmd fails in case of empty dtoIn,
+    //  and you can have empty dtoIn by your validations (no required fields)
     const { pageInfo } = dtoIn;
 
     if (!pageInfo) pageInfo = {};
@@ -145,6 +147,8 @@ class ItemAbl {
     );
 
     // HDS 2
+    // TODO rev it is better to use uuItem instead of uuList - because you call
+    //  dao method from item entity, not from list
     let uuList = await this.dao.get(awid, dtoIn.id);
     // HDS A3
     if (!uuList) throw new Errors.Complete.ItemDoesNotExist(uuAppErrorMap, { dtoIn });
@@ -174,12 +178,15 @@ class ItemAbl {
     );
 
     //HDS 3
+    // TODO rev and here place for uuList name: you call dao method of list entity
     let list = await this.daoList.get(awid, dtoIn.listId);
     //HDS A4
     if (dtoIn.listId != list.id) {
       throw new Errors.Update.ListDoesNotExist(uuAppErrorMap, { dtoIn });
     }
     // HDS 2
+    // TODO rev it is better to use uuItem instead of uuList - because you call
+    //  dao method from item entity, not from list
     let uuList = await this.dao.get(awid, dtoIn.id);
     // HDS A3
     if (!uuList) throw new Errors.Update.ItemDoesNotExist(uuAppErrorMap, { dtoIn });

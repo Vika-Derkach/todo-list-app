@@ -50,6 +50,9 @@ class ListAbl {
       Errors.List.InvalidDtoIn
     );
     // HDS 1.4.
+
+    // TODO rev use let { pageInfo } - cmd fails in case of empty dtoIn,
+    //  and you can have empty dtoIn by your validations (no required fields)
     const { pageInfo } = dtoIn;
 
     if (!pageInfo) pageInfo = {};
