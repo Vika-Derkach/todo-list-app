@@ -9,6 +9,7 @@ import Config from "./config/config";
 import Left from "./left";
 import Bottom from "./bottom";
 import Home from "../routes/home";
+import List from "../routes/list";
 //@@viewOff:imports
 
 const STATICS = {
@@ -21,10 +22,10 @@ const About = UU5.Common.Component.lazy(() => import("../routes/about"));
 const InitAppWorkspace = UU5.Common.Component.lazy(() => import("../routes/init-app-workspace"));
 const ControlPanel = UU5.Common.Component.lazy(() => import("../routes/control-panel"));
 
-const DEFAULT_USE_CASE = "home";
+const DEFAULT_USE_CASE = "list";
 const ROUTES = {
   "": DEFAULT_USE_CASE,
-  home: { component: <Home /> },
+  list: { component: <List /> },
   about: { component: <About /> },
   "sys/uuAppWorkspace/initUve": { component: <InitAppWorkspace /> },
   controlPanel: { component: <ControlPanel /> },
@@ -43,7 +44,10 @@ export const SpaAuthenticated = createVisualComponent({
     //@@viewOn:private
     let [initialActiveItemId] = useState(() => {
       let url = UU5.Common.Url.parse(window.location.href);
-      return url.useCase || DEFAULT_USE_CASE;
+      if (url.useCase === "about") {
+        return url?.useCase || DEFAULT_USE_CASE;
+      }
+      return url.parameters || DEFAULT_USE_CASE;
     });
     //@@viewOff:private
 
@@ -73,7 +77,14 @@ export const SpaAuthenticated = createVisualComponent({
         >
           <Plus4U5.App.MenuConsumer>
             {({ setActiveItemId }) => {
-              let handleRouteChanged = ({ useCase, parameters }) => setActiveItemId(useCase || DEFAULT_USE_CASE);
+              let handleRouteChanged = ({ useCase, parameters }) => {
+                if (useCase === "about") {
+                  setActiveItemId(useCase || DEFAULT_USE_CASE);
+                } else {
+                  setActiveItemId(parameters.id || DEFAULT_USE_CASE);
+                }
+              };
+
               return <UU5.Common.Router routes={ROUTES} controlled={false} onRouteChanged={handleRouteChanged} />;
             }}
           </Plus4U5.App.MenuConsumer>

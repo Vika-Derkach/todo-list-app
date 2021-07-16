@@ -17,6 +17,51 @@ let Calls = {
     let commandUri = Calls.getCommandUri("loadDemoContent");
     return Calls.call("get", commandUri, dtoIn);
   },
+  listList(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("list/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  createList(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("list/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  getList(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("list/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  updateList(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("list/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  deleteList(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("list/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  ///////////////
+  listItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/list");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  createItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/create");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  getItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/get");
+    return Calls.call("get", commandUri, dtoIn);
+  },
+  updateItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/update");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  deleteItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/delete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
+  completeItem(dtoIn = {}) {
+    let commandUri = Calls.getCommandUri("item/complete");
+    return Calls.call("post", commandUri, dtoIn);
+  },
 
   loadIdentityProfiles() {
     let commandUri = Calls.getCommandUri("sys/uuAppWorkspace/initUve");
