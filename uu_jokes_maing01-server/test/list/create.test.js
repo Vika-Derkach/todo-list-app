@@ -62,6 +62,7 @@ describe(`Testing ${useCase} uuCmd...`, () => {
 
   test("Add list by list DAO create failed.", async () => {
     let session = await TestHelper.login("AwidLicenseOwner", false, false);
+
     const dtoIn = {
       name: "vika",
     };

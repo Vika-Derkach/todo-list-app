@@ -238,7 +238,7 @@ class ItemAbl {
     let list = await this.daoList.get(awid, dtoIn.listId);
 
     //HDS 2
-    if (dtoIn.listId !== list.id) {
+    if (dtoIn.listId.toString() !== list.id.toString()) {
       throw new Errors.Create.ListDoesNotExist(uuAppErrorMap, { dtoIn });
     }
     //HDS 4

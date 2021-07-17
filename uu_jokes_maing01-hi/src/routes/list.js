@@ -31,39 +31,42 @@ export const List = createVisualComponent({
 
     const url = UU5.Common.Url.parse(window.location.href);
     const urlId = url._parameters.id;
-
-    const dataItemResult = useDataList({
-      handlerMap: {
-        load: Calls.listItem,
-        createItem: Calls.createItem,
-        update: Calls.updateItem,
-        delete: Calls.deleteItem,
-        setComplete: Calls.completeItem,
-      },
-      itemHandlerMap: {
-        load: Calls.getItem,
-        update: Calls.updateItem,
-        delete: Calls.deleteItem,
-      },
-      initialDtoIn: {
-        // listId: "60e7350bca31812058d50866",
-        listId: urlId,
-      },
-    });
+    console.log({ urlId });
+    const dataItemResult = useDataList(
+      {
+        handlerMap: {
+          load: Calls.listItem,
+          createItem: Calls.createItem,
+          update: Calls.updateItem,
+          delete: Calls.deleteItem,
+          setComplete: Calls.completeItem,
+        },
+        itemHandlerMap: {
+          load: Calls.getItem,
+          update: Calls.updateItem,
+          delete: Calls.deleteItem,
+        },
+        initialDtoIn: {
+          // listId: "60e7350bca31812058d50866",
+          listId: urlId,
+        },
+      }
+      // [urlId]
+    );
 
     //@@viewOn:interface
     //@@viewOff:interface
 
     let { call, viewState, data, error, state, handlerMap, initialDtoIn } = dataItemResult;
 
+    useEffect(() => {
+      if (typeof handlerMap.load === "function") {
+        handlerMap.load({ listId: urlId });
+      }
+    }, [urlId]);
     //@@viewOn:interface
     //@@viewOff:interface\
 
-    ///////////
-    useEffect(() => {
-      handlerMap.load;
-    }, [urlId]);
-    /////////////
     const [text, setText] = useState("");
     const handleItemCreate = async (values) => {
       await handlerMap.createItem({ ...values, listId: urlId });
