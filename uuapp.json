@@ -12,6 +12,162 @@
       "appDeploymentUri": null
     }
   },
-  "uu_jokes_maing01-hi": {},
+  "uu_jokes_maing01-hi": {
+    "componentList": [
+      {
+        "code": "UuJokes.Routes.List",
+        "name": "List",
+        "tagList": [
+          "UuJokes",
+          "Routes",
+          "List"
+        ],
+        "docCode": "UuJokesRoutesList",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Routes.List />"
+      },
+      {
+        "code": "UuJokes.Bricks.Page",
+        "name": "Page",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "Page"
+        ],
+        "docCode": "UuJokesBricksPage",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.Page />"
+      },
+      {
+        "code": "UuJokes.Context.ListContext",
+        "name": "ListContext",
+        "tagList": [
+          "UuJokes",
+          "Context",
+          "ListContext"
+        ],
+        "docCode": "UuJokesContextListContext",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Context.ListContext />"
+      },
+      {
+        "code": "UuJokes.Bricks.ListProvider",
+        "name": "ListProvider",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "ListProvider"
+        ],
+        "docCode": "UuJokesBricksListProvider",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.ListProvider />"
+      },
+      {
+        "code": "UuJokes.Bricks.List",
+        "name": "List",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "List"
+        ],
+        "docCode": "UuJokesBricksList",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.List />"
+      },
+      {
+        "code": "UuJokes.Bricks.ListModal",
+        "name": "ListModal",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "ListModal"
+        ],
+        "docCode": "UuJokesBricksListModal",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.ListModal />"
+      },
+      {
+        "code": "UuJokes.Bricks.Forms.DeleteListModalForm",
+        "name": "DeleteListModalForm",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "Forms",
+          "DeleteListModalForm"
+        ],
+        "docCode": "UuJokesBricksFormsDeleteListModalForm",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.Forms.DeleteListModalForm />"
+      },
+      {
+        "code": "UuJokes.Bricks.Forms.CreateListModalForm",
+        "name": "CreateListModalForm",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "Forms",
+          "CreateListModalForm"
+        ],
+        "docCode": "UuJokesBricksFormsCreateListModalForm",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.Forms.CreateListModalForm />"
+      },
+      {
+        "code": "UuJokes.Bricks.Forms.UpdateListModalForm",
+        "name": "UpdateListModalForm",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "Forms",
+          "UpdateListModalForm"
+        ],
+        "docCode": "UuJokesBricksFormsUpdateListModalForm",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.Forms.UpdateListModalForm />"
+      },
+      {
+        "code": "UuJokes.Bricks.ItemList",
+        "name": "ItemList",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "ItemList"
+        ],
+        "docCode": "UuJokesBricksItemList",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.ItemList />"
+      }
+    ]
+  },
   "uu_jokes_maing01-server": {}
 }

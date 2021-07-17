@@ -4,7 +4,6 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 class JokeMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ code: 1, awaid: 1 }, { unique: true });
-    // await super.createIndex({ awid: 1 }, { unique: true });
   }
 
   async create(uuObject) {

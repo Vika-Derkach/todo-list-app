@@ -63,7 +63,7 @@ export const List = createVisualComponent({
     useEffect(() => {
       handlerMap.load;
     }, [urlId]);
-    /////////////////
+    /////////////
     const [text, setText] = useState("");
     const handleItemCreate = async (values) => {
       await handlerMap.createItem({ ...values, listId: urlId });

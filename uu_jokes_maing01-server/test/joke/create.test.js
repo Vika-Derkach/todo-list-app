@@ -16,7 +16,7 @@ afterAll(async () => {
 describe(`Testing ${useCase} uuCmd...`, () => {
   test("HDS - SHO TAM", async () => {
     let session = await TestHelper.login("AwidLicenseOwner", false, false);
-    // let session = await TestHelper.login("AwidLicenseOwner", false, false);
+
     const dtoIn = {
       name: "vika",
       text: "is",

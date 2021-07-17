@@ -305,7 +305,7 @@ class JokeAbl {
     // }
     const uuObject = {
       awid,
-      jokePicCode: jokePic?.code,
+      jokePicCode: jokePic.code,
       ...restDtoIn,
     };
     //2.4.Adds keys and values from Added Values table to dtoIn object.

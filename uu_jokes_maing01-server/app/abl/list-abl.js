@@ -101,11 +101,11 @@ class ListAbl {
       } catch (e) {
         throw new Errors.Delete.ListDaoDeleteFailed({ uuAppErrorMap }, e);
       }
-      return { uuAppErrorMap, result: true };
+      return { uuAppErrorMap };
     }
 
     // HDS 4
-    return { uuAppErrorMap, result: false };
+    return { uuAppErrorMap };
   }
 
   async update(awid, dtoIn, uuAppErrorMap = {}) {
@@ -153,7 +153,7 @@ class ListAbl {
     try {
       uuObject = await this.dao.get(awid, dtoIn.id);
     } catch (e) {
-      throw Errors.Get.ListDoesNotExist(uuAppErrorMap, { id: dtoIn.id, cause: e });
+      throw new Errors.Get.ListDoesNotExist(uuAppErrorMap, { id: dtoIn.id, cause: e });
     }
     // HDS 3
     return { ...uuObject, uuAppErrorMap };
@@ -180,7 +180,7 @@ class ListAbl {
     try {
       dtoOut = await this.dao.create(uuObject);
     } catch (e) {
-      throw Errors.Create.ListDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
+      throw new Errors.Create.ListDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
     }
     //HDS 3
     return { ...dtoOut, uuAppErrorMap };

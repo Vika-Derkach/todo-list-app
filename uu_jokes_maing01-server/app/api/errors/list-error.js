@@ -64,14 +64,6 @@ const Update = {
       this.message = "Update list by list DAO update failed.";
     }
   },
-
-  // ListDoesNotExist: class extends JokesMainUseCaseError {
-  //   constructor() {
-  //     super(...arguments);
-  //     this.code = `${Update.UC_CODE}listDoesNotExist`;
-  //     this.message = "List with given id does not exist.";
-  //   }
-  // },
 };
 
 const Delete = {

@@ -54,8 +54,8 @@ class ItemAbl {
       Errors.List.InvalidDtoIn
     );
     // HDS 1.4.
-    const { pageInfo } = dtoIn;
-
+    // const { pageInfo } = dtoIn;
+    let { pageInfo } = dtoIn;
     if (!pageInfo) pageInfo = {};
     if (!pageInfo.pageSize) pageInfo.pageSize = defaultValues.pageSize;
     if (!pageInfo.pageIndex) pageInfo.pageIndex = defaultValues.pageIndex;
@@ -176,7 +176,7 @@ class ItemAbl {
     //HDS 3
     let list = await this.daoList.get(awid, dtoIn.listId);
     //HDS A4
-    if (dtoIn.listId != list.id) {
+    if (dtoIn.listId !== list.id) {
       throw new Errors.Update.ListDoesNotExist(uuAppErrorMap, { dtoIn });
     }
     // HDS 2
@@ -212,7 +212,7 @@ class ItemAbl {
     try {
       uuObject = await this.dao.get(awid, dtoIn.id);
     } catch (e) {
-      throw Errors.Get.ItemDoesNotExist(uuAppErrorMap, { dtoIn, cause: e });
+      throw new Errors.Get.ItemDoesNotExist(uuAppErrorMap, { dtoIn, cause: e });
     }
     //HDS 3
     return { ...uuObject, uuAppErrorMap };
@@ -238,7 +238,7 @@ class ItemAbl {
     let list = await this.daoList.get(awid, dtoIn.listId);
 
     //HDS 2
-    if (dtoIn.listId != list.id) {
+    if (dtoIn.listId !== list.id) {
       throw new Errors.Create.ListDoesNotExist(uuAppErrorMap, { dtoIn });
     }
     //HDS 4
@@ -247,7 +247,7 @@ class ItemAbl {
       dtoOut = await this.dao.create(uuObject);
     } catch (e) {
       //HDS A4
-      throw Errors.Create.ItemDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
+      throw new Errors.Create.ItemDaoCreateFailed(uuAppErrorMap, { dtoIn, cause: e });
     }
     //HDS 5
     return { ...dtoOut, uuAppErrorMap };
