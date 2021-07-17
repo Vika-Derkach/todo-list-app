@@ -1,6 +1,6 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createVisualComponent, useDataList, useEffect } from "uu5g04-hooks";
+import { createVisualComponent, useDataList, useEffect, useState } from "uu5g04-hooks";
 import Config from "./config/config";
 import Calls from "../calls";
 import ItemList from "../bricks/item-list";
@@ -64,6 +64,12 @@ export const List = createVisualComponent({
       handlerMap.load;
     }, [urlId]);
     /////////////////
+    const [text, setText] = useState("");
+    const handleItemCreate = async (values) => {
+      await handlerMap.createItem({ ...values, listId: urlId });
+
+      setText("");
+    };
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
@@ -73,7 +79,22 @@ export const List = createVisualComponent({
       <div {...attrs}>
         {/* <div>bla{STATICS.displayName}</div> */}
         {/* <div>{JSON.stringify(data)}</div> */}
-
+        <UU5.Forms.TextButton
+          placeholder="Add to do..."
+          // feedback="success"
+          // message="success message"
+          // required
+          value={text}
+          size="xl"
+          onChange={(event) => setText(event.value)}
+          buttons={[
+            {
+              icon: "uu5-ok",
+              onClick: () => handleItemCreate({ ...data, text }),
+              colorSchema: "grey",
+            },
+          ]}
+        />
         {data?.map(({ data }) => {
           // return JSON.stringify(data);
           return <ItemList data={data} dataItemResult={dataItemResult} urlId={urlId} />;
