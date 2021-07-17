@@ -41,7 +41,6 @@ export const UpdateListModalForm = createVisualComponent({
 
       component.reset();
       component.setReady();
-
       component.getAlertBus().clearAlerts();
     };
 

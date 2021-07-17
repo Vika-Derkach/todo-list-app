@@ -47,7 +47,7 @@ export const Left = createVisualComponent({
     //@@viewOff:interface
     //useDataList
     let { call, viewState, data, error, state } = dataListResult;
-    console.log("datalist", data);
+
     const listRef = useRef();
 
     function openDeleteConfirm(list, callback) {
@@ -121,7 +121,7 @@ export const Left = createVisualComponent({
               );
 
             case "pending":
-              <Plus4U5.App.Loading />;
+              return <Plus4U5.App.Loading />;
             default:
               break;
           }

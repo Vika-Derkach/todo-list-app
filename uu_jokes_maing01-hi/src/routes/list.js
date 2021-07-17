@@ -1,8 +1,9 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
-import { createVisualComponent, useDataList } from "uu5g04-hooks";
+import { createVisualComponent, useDataList, useEffect } from "uu5g04-hooks";
 import Config from "./config/config";
 import Calls from "../calls";
+import ItemList from "../bricks/item-list";
 
 //@@viewOff:imports
 
@@ -27,6 +28,10 @@ export const List = createVisualComponent({
   render(props) {
     //@@viewOn:private
     //@@viewOff:private
+
+    const url = UU5.Common.Url.parse(window.location.href);
+    const urlId = url._parameters.id;
+
     const dataItemResult = useDataList({
       handlerMap: {
         load: Calls.listItem,
@@ -40,17 +45,25 @@ export const List = createVisualComponent({
         update: Calls.updateItem,
         delete: Calls.deleteItem,
       },
+      initialDtoIn: {
+        // listId: "60e7350bca31812058d50866",
+        listId: urlId,
+      },
     });
-    //@@viewOn:interface
-    //@@viewOff:interface
-    //useDataList
-    let { call, viewState, data, error, state, handlerMap } = dataItemResult;
-    console.log("dataItemResult, data", dataItemResult);
-    console.log("handlerMap", handlerMap);
-    console.log("data, data", data);
+
     //@@viewOn:interface
     //@@viewOff:interface
 
+    let { call, viewState, data, error, state, handlerMap, initialDtoIn } = dataItemResult;
+
+    //@@viewOn:interface
+    //@@viewOff:interface\
+
+    ///////////
+    useEffect(() => {
+      handlerMap.load;
+    }, [urlId]);
+    /////////////////
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
@@ -58,14 +71,72 @@ export const List = createVisualComponent({
 
     return currentNestingLevel ? (
       <div {...attrs}>
-        <div>bla{STATICS.displayName}</div>
+        {/* <div>bla{STATICS.displayName}</div> */}
+        {/* <div>{JSON.stringify(data)}</div> */}
 
-        <div> {JSON.stringify(data)}</div>
-        {data?.map((item, i) =>
-          // <JokeItem item={item} key={i} />
+        {data?.map(({ data }) => {
+          // return JSON.stringify(data);
+          return <ItemList data={data} dataItemResult={dataItemResult} urlId={urlId} />;
 
-          JSON.stringify(data)
-        )}
+          // id: data.id,
+          // content: data.name,
+          // href: `list?id=${data.id}`,
+        })}
+
+        {() => {
+          switch (state) {
+            case "error":
+              return <UU5.Common.Error errorData={errorData} />;
+            case "ready":
+              return (
+                <>
+                  {/* {data?.map(({ data }) => {
+                    return JSON.stringify(data);
+                    // id: data.id,
+                    // content: data.name,
+
+                    // href: `list?id=${data.id}`,
+                  })} */}
+                  {/* <div>dsfsdfs</div>
+                  {data?.map(
+                    ({ data }) => {
+                      return JSON.stringify(data[0].text);
+                      // id: data.id,
+                      // content: data.name,
+
+                      // href: `list?id=${data.id}`,
+                    }
+                    // <JokeItem item={item} key={i} />
+
+                    // JSON.stringify(data)
+                  )}
+                  <div>{JSON.stringify(data)}</div>
+                  <Plus4U5.App.MenuTree
+                    borderBottom
+                    // NOTE Item "id" equals to useCase so that item gets automatically selected when route changes (see spa-autheticated.js).
+                    items={data?.map(
+                      ({ data }) => {
+                        return {
+                          id: data.id,
+                          // content: data.name,
+                          content: JSON.stringify(data.text),
+                          // href: `list?id=${data.id}`,
+                        };
+                      }
+                      // <JokeItem item={item} key={i} />
+
+                      // JSON.stringify(data)
+                    )}
+                  /> */}
+                </>
+              );
+
+            case "pending":
+              return <Plus4U5.App.Loading />;
+            default:
+              break;
+          }
+        }}
       </div>
     ) : null;
     //@@viewOff:render
