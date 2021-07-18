@@ -40,14 +40,7 @@ export const Bottom = createVisualComponent({
 
     //@@viewOn:render
     const attrs = UU5.Common.VisualComponent.getAttrs(props, CLASS_NAMES.main());
-    return (
-      <div {...attrs}>
-        uuJokesMaing01-{process.env.VERSION} © Unicorn,{" "}
-        <UU5.Bricks.Link target="_blank" href="TODO">
-          <UU5.Bricks.Lsi lsi={Lsi.bottom.termsOfUse} />
-        </UU5.Bricks.Link>
-      </div>
-    );
+    return <div {...attrs}>Copyright ©</div>;
     //@@viewOff:render
   },
 });

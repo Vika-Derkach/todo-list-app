@@ -30,7 +30,10 @@ const ROUTES = {
   "sys/uuAppWorkspace/initUve": { component: <InitAppWorkspace /> },
   controlPanel: { component: <ControlPanel /> },
 };
-
+// linear-gradient(to right bottom, rgb(25, 118, 210) 0%, rgb(33, 150, 243) 100%)
+const app_top = () => Config.Css.css`
+background-color: rgb(33, 150, 243);
+`;
 export const SpaAuthenticated = createVisualComponent({
   ...STATICS,
 
@@ -59,7 +62,7 @@ export const SpaAuthenticated = createVisualComponent({
       <Plus4U5.App.MenuProvider activeItemId={initialActiveItemId}>
         <Plus4U5.App.Page
           {...props}
-          top={<Plus4U5.App.TopBt />}
+          top={<Plus4U5.App.TopBt className={app_top()} />}
           topFixed="smart"
           bottom={<Bottom />}
           type={3}

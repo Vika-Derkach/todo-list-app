@@ -75,11 +75,8 @@ export const Left = createVisualComponent({
         logoProps={{
           backgroundColor: UU5.Environment.colors.blue.c700,
           backgroundColorTo: UU5.Environment.colors.blue.c500,
-          title: "uuJokes",
-          companyLogo: Plus4U5.Environment.basePath + "assets/img/unicorn-logo.svg",
-          generation: "1",
+          title: "uuTodo",
         }}
-        aboutItems={[{ content: <UU5.Bricks.Lsi lsi={Lsi.left.about} />, href: "about" }]}
         helpHref={null}
       >
         {() => {
@@ -99,6 +96,7 @@ export const Left = createVisualComponent({
                           // content: data.name,
                           content: (
                             <List
+                              key={data.id}
                               id={data.id}
                               data={data}
                               openDeleteConfirm={openDeleteConfirm}
