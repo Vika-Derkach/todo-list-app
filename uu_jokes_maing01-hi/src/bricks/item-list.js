@@ -12,9 +12,27 @@ const STATICS = {
 };
 const item_crossed_text = () => Config.Css.css`
 text-decoration: line-through;
+width: 78%;
 `;
 const item_noncrossed_text = () => Config.Css.css`
 text-decoration: none;
+width: 78%;
+`;
+const item_box = () => Config.Css.css`
+display: flex;
+align-items: center;
+
+width: 100%
+`;
+const item_veiw = () => Config.Css.css`
+margin-bottom: 10px;
+border-radius: 5%;
+`;
+const item_button = () => Config.Css.css`
+width: 10%
+`;
+const item_checkbox = () => Config.Css.css`
+width: 5%
 `;
 let item_text;
 export const ItemList = createVisualComponent({
@@ -43,7 +61,9 @@ export const ItemList = createVisualComponent({
     //@@viewOn:interface
     //@@viewOff:interface
     const handleItemDelete = async () => {
+      setEdit(!edit);
       await handlerMap.delete({ id: data.id });
+      // setEdit(!edit);
     };
     const handleItemUpdate = async (values) => {
       await handlerMap.update({ ...values, id: data.id, listId: urlId });
@@ -88,13 +108,28 @@ export const ItemList = createVisualComponent({
     } else {
       return currentNestingLevel ? (
         <div {...attrs}>
-          <UU5.Bricks.Box colorSchema="grey">
-            <UU5.Forms.Checkbox value={complete} size="s" onChange={() => handleItemComplete()} />
-            <UU5.Bricks.Text className={item_text}>{text}</UU5.Bricks.Text>
-            <UU5.Bricks.Button onClick={() => setEdit(true)}>
-              <UU5.Bricks.Icon icon="mdi-star" />
-            </UU5.Bricks.Button>
-          </UU5.Bricks.Box>
+          <UU5.Bricks.Div className={item_veiw()}>
+            <UU5.Bricks.Box className={item_box()} colorSchema="grey">
+              <UU5.Bricks.Div className={item_checkbox()}>
+                <UU5.Forms.Checkbox
+                  value={complete}
+                  size="s"
+                  onChange={() => handleItemComplete()}
+                  labelPosition="center"
+                />
+              </UU5.Bricks.Div>
+              <UU5.Bricks.Div className={item_text}>
+                {" "}
+                <UU5.Bricks.Text>{text}</UU5.Bricks.Text>
+              </UU5.Bricks.Div>
+              <UU5.Bricks.Div className={item_button()}>
+                {" "}
+                <UU5.Bricks.Button onClick={() => setEdit(true)}>
+                  <UU5.Bricks.Icon icon="mdi-pencil" />
+                </UU5.Bricks.Button>
+              </UU5.Bricks.Div>
+            </UU5.Bricks.Box>
+          </UU5.Bricks.Div>
         </div>
       ) : null;
     }

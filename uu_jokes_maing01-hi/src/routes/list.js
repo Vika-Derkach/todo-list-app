@@ -13,7 +13,16 @@ const STATICS = {
   nestingLevel: "bigBoxCollection",
   //@@viewOff:statics
 };
+const create_button = () => Config.Css.css`
+margin-bottom: 20px;
 
+`;
+
+const item_list = () => Config.Css.css`
+padding: 2%;
+background-color: darkblue;
+
+`;
 export const List = createVisualComponent({
   ...STATICS,
 
@@ -75,33 +84,35 @@ export const List = createVisualComponent({
 
     return currentNestingLevel ? (
       <div {...attrs}>
-        {/* <div>bla{STATICS.displayName}</div> */}
-        {/* <div>{JSON.stringify(data)}</div> */}
-        <UU5.Forms.TextButton
-          placeholder="Add to do..."
-          // feedback="success"
-          // message="success message"
-          // required
-          value={text}
-          size="xl"
-          onChange={(event) => setText(event.value)}
-          buttons={[
-            {
-              icon: "uu5-ok",
-              onClick: () => handleItemCreate({ ...data, text }),
-              colorSchema: "grey",
-            },
-          ]}
-        />
-        {data?.map(({ data }) => {
-          // return JSON.stringify(data);
-          return <ItemList data={data} dataItemResult={dataItemResult} urlId={urlId} />;
+        <UU5.Bricks.Div className={item_list()}>
+          {/* <div>bla{STATICS.displayName}</div> */}
+          {/* <div>{JSON.stringify(data)}</div> */}
+          <UU5.Forms.TextButton
+            placeholder="Add to do..."
+            // feedback="success"
+            // message="success message"
+            // required
+            value={text}
+            size="m"
+            className={create_button()}
+            onChange={(event) => setText(event.value)}
+            buttons={[
+              {
+                icon: "uu5-ok",
+                onClick: () => handleItemCreate({ ...data, text }),
+                colorSchema: "grey",
+              },
+            ]}
+          />
+          {data?.map(({ data }) => {
+            // return JSON.stringify(data);
+            return <ItemList key={data.id} data={data} dataItemResult={dataItemResult} urlId={urlId} />;
 
-          // id: data.id,
-          // content: data.name,
-          // href: `list?id=${data.id}`,
-        })}
-
+            // id: data.id,
+            // content: data.name,
+            // href: `list?id=${data.id}`,
+          })}
+        </UU5.Bricks.Div>
         {() => {
           switch (state) {
             case "error":
