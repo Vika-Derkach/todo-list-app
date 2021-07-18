@@ -52,11 +52,10 @@ export const ItemList = createVisualComponent({
 
     const { data, dataItemResult, urlId } = props;
     const { handlerMap } = dataItemResult;
-    console.log("handlerMapcccccccccccccc", handlerMap);
+
     const [text, setText] = useState(data.text);
     const [edit, setEdit] = useState(false);
     const [complete, setComplete] = useState(data.completed);
-    console.log(data.completed);
 
     //@@viewOn:interface
     //@@viewOff:interface
@@ -109,7 +108,7 @@ export const ItemList = createVisualComponent({
       return currentNestingLevel ? (
         <div {...attrs}>
           <UU5.Bricks.Div className={item_veiw()}>
-            <UU5.Bricks.Box className={item_box()} colorSchema="grey">
+            <UU5.Bricks.Box borderRadius="8px" className={item_box()} colorSchema="grey">
               <UU5.Bricks.Div className={item_checkbox()}>
                 <UU5.Forms.Checkbox
                   value={complete}

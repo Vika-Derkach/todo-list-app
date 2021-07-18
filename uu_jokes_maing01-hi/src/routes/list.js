@@ -88,6 +88,7 @@ export const List = createVisualComponent({
           {/* <div>bla{STATICS.displayName}</div> */}
           {/* <div>{JSON.stringify(data)}</div> */}
           <UU5.Forms.TextButton
+            actionOnEnter={true}
             placeholder="Add to do..."
             // feedback="success"
             // message="success message"

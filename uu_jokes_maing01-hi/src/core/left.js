@@ -17,7 +17,12 @@ const STATICS = {
   displayName: Config.TAG + "Left",
   //@@viewOff:static
 };
+const create_list_button = () => Config.Css.css`
+margin-top: 10px;
+margin-bottom: 10px;
+text-align: center; 
 
+`;
 export const Left = createVisualComponent({
   ...STATICS,
 
@@ -109,8 +114,8 @@ export const Left = createVisualComponent({
                       // JSON.stringify(data)
                     )}
                   />
-                  <UU5.Bricks.Div>
-                    <UU5.Bricks.Button colorSchema="transparent" onClick={openCreateModal}>
+                  <UU5.Bricks.Div className={create_list_button()}>
+                    <UU5.Bricks.Button colorSchema="blue" bgStyle="transparent" onClick={openCreateModal}>
                       <UU5.Bricks.Icon icon="uu5-plus" />
                       Create
                     </UU5.Bricks.Button>
