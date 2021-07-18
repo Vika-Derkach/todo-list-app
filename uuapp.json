@@ -166,6 +166,21 @@
         "imageUri": "",
         "uuEccReady": false,
         "template": "<UuJokes.Bricks.ItemList />"
+      },
+      {
+        "code": "UuJokes.Bricks.ItemListCompleted",
+        "name": "ItemListCompleted",
+        "tagList": [
+          "UuJokes",
+          "Bricks",
+          "ItemListCompleted"
+        ],
+        "docCode": "UuJokesBricksItemListCompleted",
+        "desc": "",
+        "icon": "",
+        "imageUri": "",
+        "uuEccReady": false,
+        "template": "<UuJokes.Bricks.ItemListCompleted />"
       }
     ]
   },

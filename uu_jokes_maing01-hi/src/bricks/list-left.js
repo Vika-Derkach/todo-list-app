@@ -2,6 +2,7 @@
 import UU5 from "uu5g04";
 import { createVisualComponent, useCallback, useState } from "uu5g04-hooks";
 import Config from "./config/config";
+import Calls from "../calls";
 //@@viewOff:imports
 
 const STATICS = {
@@ -21,7 +22,6 @@ margin: 5px;
 const list_box = () => Config.Css.css`
 display: flex;
 align-items: center;
-
 width: 100%
 `;
 const list_veiw = () => Config.Css.css`
@@ -35,7 +35,7 @@ const list_text = () => Config.Css.css`
 width: 80%
 `;
 
-export const List = createVisualComponent({
+export const ListLeft = createVisualComponent({
   ...STATICS,
 
   //@@viewOn:propTypes
@@ -54,10 +54,21 @@ export const List = createVisualComponent({
     const [name, setName] = useState(data.name);
     const [edit, setEdit] = useState(false);
 
-    const handleListDelete = useCallback((item) => {
-      openDeleteConfirm(data, handlerMap.delete);
+    let itemListLength;
+    Calls.listItem({ listId: data.id }).then((el) => {
+      itemListLength = el.itemList.length;
+    });
+
+    const handleListDeleteForce = (data) => {
+      if (itemListLength <= 0) {
+        handlerMap.delete({ id: data.id });
+      } else {
+        openDeleteConfirm(data, handlerMap.delete);
+      }
+
       // closeDetail();
-    }, []);
+    };
+    console.log("sss", data);
     // const handleListUpdate = useCallback((item) => {
     //   openUpdateModal(data, handlerMap.update);
 
@@ -87,7 +98,7 @@ export const List = createVisualComponent({
             buttons={[
               {
                 icon: "plus4u5-trash-can",
-                onClick: () => handleListDelete(),
+                onClick: () => handleListDeleteForce(data),
                 colorSchema: "info",
               },
 
@@ -105,7 +116,7 @@ export const List = createVisualComponent({
       return currentNestingLevel ? (
         <div {...attrs}>
           <UU5.Bricks.Div className={list_veiw()}>
-            <UU5.Bricks.Box bgStyle="filled" className={list_box()} colorSchema="white">
+            <UU5.Bricks.Box bgStyle="filled" colorSchema="blue" className={list_box()}>
               <UU5.Bricks.Div className={list_text()}>
                 {" "}
                 <UU5.Bricks.Text>{name}</UU5.Bricks.Text>
@@ -127,4 +138,4 @@ export const List = createVisualComponent({
   },
 });
 
-export default List;
+export default ListLeft;

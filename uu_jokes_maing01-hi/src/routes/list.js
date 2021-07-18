@@ -21,12 +21,11 @@ margin-bottom: 20px;
 
 const item_list = () => Config.Css.css`
 padding: 2%;
-background-color: darkblue;
-
+background-color: rgba(1,42,74,255);
 `;
 const showCompletedItemsBtn = () => Config.Css.css`
 margin-bottom: 20px;
-
+border-radius: 5px;
 `;
 
 export const List = createVisualComponent({
@@ -87,7 +86,6 @@ export const List = createVisualComponent({
     let textButtonComplete = show ? "Hide completed items" : "Show completed items";
 
     const CompleteItem = () => {
-      console.log({ dataComplited: data?.filter((elem) => elem.data.completed) });
       if (show) {
         return data?.map(({ data }) => {
           if (data.completed) {
@@ -107,7 +105,7 @@ export const List = createVisualComponent({
         return <div></div>;
       }
     };
-    console.log("data", data);
+
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);

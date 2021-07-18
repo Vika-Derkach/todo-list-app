@@ -122,6 +122,7 @@ class ItemAbl {
       Errors.Delete.InvalidDtoIn
     );
 
+    let item = await this.dao.get(awid, dtoIn.id);
     // HDS 2
     try {
       await this.dao.delete(awid, dtoIn.id);
@@ -176,7 +177,7 @@ class ItemAbl {
     //HDS 3
     let list = await this.daoList.get(awid, dtoIn.listId);
     //HDS A4
-    if (dtoIn.listId !== list.id) {
+    if (dtoIn.listId.toString() !== list.id.toString()) {
       throw new Errors.Update.ListDoesNotExist(uuAppErrorMap, { dtoIn });
     }
     // HDS 2

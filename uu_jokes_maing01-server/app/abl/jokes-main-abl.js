@@ -23,7 +23,6 @@ class JokesMainAbl {
   }
 
   async init(uri, dtoIn, session) {
-    console.log("here");
     const awid = uri.getAwid();
     // HDS 1
     let validationResult = this.validator.validate("initDtoInType", dtoIn);
@@ -109,7 +108,6 @@ class JokesMainAbl {
     //create jokeInstance
     let dtoOut;
     try {
-      console.log({ dtoIn });
       dtoOut = await this.dao.create({ ...dtoIn, awid });
     } catch (e) {
       throw new Error(e);

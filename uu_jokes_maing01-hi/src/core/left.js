@@ -8,7 +8,7 @@ import "uu_plus4u5g01-app";
 import Config from "./config/config.js";
 import Lsi from "../config/lsi.js";
 import Calls from "../calls";
-import List from "../bricks/list";
+import ListLeft from "../bricks/list-left";
 import ListModal from "../bricks/list-modal.js";
 //@@viewOff:imports
 
@@ -48,10 +48,19 @@ export const Left = createVisualComponent({
         delete: Calls.deleteList,
       },
     });
+    // const getListItem = async () => await Calls.listItem();
+
     //@@viewOn:interface
+
     //@@viewOff:interface
     //useDataList
     let { call, viewState, data, error, state } = dataListResult;
+    console.log({ datagfh: data });
+    // if (data) {
+    //   Calls.listItem({ listId: data[0].data.id }).then((fsdfs) => {
+    //     console.log({ fsdfs });
+    //   });
+    // }
 
     const listRef = useRef();
 
@@ -75,7 +84,7 @@ export const Left = createVisualComponent({
         logoProps={{
           backgroundColor: UU5.Environment.colors.blue.c700,
           backgroundColorTo: UU5.Environment.colors.blue.c500,
-          title: "uuTodo",
+          title: "uuToDo",
         }}
         helpHref={null}
       >
@@ -89,28 +98,23 @@ export const Left = createVisualComponent({
                   <Plus4U5.App.MenuTree
                     borderBottom
                     // NOTE Item "id" equals to useCase so that item gets automatically selected when route changes (see spa-autheticated.js).
-                    items={data?.map(
-                      ({ data }) => {
-                        return {
-                          id: data.id,
-                          // content: data.name,
-                          content: (
-                            <List
-                              key={data.id}
-                              id={data.id}
-                              data={data}
-                              openDeleteConfirm={openDeleteConfirm}
-                              dataListResult={dataListResult}
-                              openUpdateModal={openUpdateModal}
-                            />
-                          ),
-                          href: `list?id=${data.id}`,
-                        };
-                      }
-                      // <JokeItem item={item} key={i} />
-
-                      // JSON.stringify(data)
-                    )}
+                    items={data?.map(({ data }) => {
+                      return {
+                        id: data.id,
+                        // content: data.name,
+                        content: (
+                          <ListLeft
+                            key={data.id}
+                            id={data.id}
+                            data={data}
+                            openDeleteConfirm={openDeleteConfirm}
+                            dataListResult={dataListResult}
+                            openUpdateModal={openUpdateModal}
+                          />
+                        ),
+                        href: `list?id=${data.id}`,
+                      };
+                    })}
                   />
                   <UU5.Bricks.Div className={create_list_button()}>
                     <UU5.Bricks.Button colorSchema="blue" bgStyle="transparent" onClick={openCreateModal}>
