@@ -4,6 +4,7 @@ import { createVisualComponent, useDataList, useEffect, useState } from "uu5g04-
 import Config from "./config/config";
 import Calls from "../calls";
 import ItemList from "../bricks/item-list";
+import ItemListCompleted from "../bricks/item-list-completed";
 
 //@@viewOff:imports
 
@@ -23,6 +24,11 @@ padding: 2%;
 background-color: darkblue;
 
 `;
+const showCompletedItemsBtn = () => Config.Css.css`
+margin-bottom: 20px;
+
+`;
+
 export const List = createVisualComponent({
   ...STATICS,
 
@@ -40,7 +46,7 @@ export const List = createVisualComponent({
 
     const url = UU5.Common.Url.parse(window.location.href);
     const urlId = url._parameters.id;
-    console.log({ urlId });
+
     const dataItemResult = useDataList({
       handlerMap: {
         load: Calls.listItem,
@@ -63,7 +69,7 @@ export const List = createVisualComponent({
     //@@viewOff:interface
 
     let { call, viewState, data, error, state, handlerMap, initialDtoIn } = dataItemResult;
-
+    const [show, setShow] = useState(false);
     useEffect(() => {
       if (typeof handlerMap.load === "function") {
         handlerMap.load({ listId: urlId });
@@ -77,6 +83,31 @@ export const List = createVisualComponent({
       await handlerMap.createItem({ ...values, listId: urlId });
       setText("");
     };
+
+    let textButtonComplete = show ? "Hide completed items" : "Show completed items";
+
+    const CompleteItem = () => {
+      console.log({ dataComplited: data?.filter((elem) => elem.data.completed) });
+      if (show) {
+        return data?.map(({ data }) => {
+          if (data.completed) {
+            return (
+              <ItemListCompleted
+                key={data.id + "-Completed"}
+                data={data}
+                dataItemResult={dataItemResult}
+                urlId={urlId}
+              />
+            );
+          }
+        });
+      } else if (data?.length <= 0) {
+        return <div>there is no completed things</div>;
+      } else {
+        return <div></div>;
+      }
+    };
+    console.log("data", data);
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
@@ -106,13 +137,19 @@ export const List = createVisualComponent({
             ]}
           />
           {data?.map(({ data }) => {
+            if (!data.completed) {
+              return <ItemList key={data.id} data={data} dataItemResult={dataItemResult} urlId={urlId} />;
+            }
             // return JSON.stringify(data);
-            return <ItemList key={data.id} data={data} dataItemResult={dataItemResult} urlId={urlId} />;
 
             // id: data.id,
             // content: data.name,
             // href: `list?id=${data.id}`,
           })}
+          <UU5.Bricks.Button className={showCompletedItemsBtn()} colorSchema="green" onClick={() => setShow(!show)}>
+            {textButtonComplete}
+          </UU5.Bricks.Button>
+          {CompleteItem()}
         </UU5.Bricks.Div>
         {() => {
           switch (state) {

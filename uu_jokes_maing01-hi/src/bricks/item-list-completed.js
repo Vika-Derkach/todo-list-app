@@ -4,16 +4,15 @@ import { createVisualComponent, useState } from "uu5g04-hooks";
 import Config from "./config/config";
 import Css from "../bricks/styles/item-list.css";
 //@@viewOff:imports
-
+let item_text;
 const STATICS = {
   //@@viewOn:statics
-  displayName: Config.TAG + "ItemList",
+  displayName: Config.TAG + "ItemListCompleted",
   nestingLevel: "bigBoxCollection",
   //@@viewOff:statics
 };
 
-let item_text;
-export const ItemList = createVisualComponent({
+export const ItemListCompleted = createVisualComponent({
   ...STATICS,
 
   //@@viewOn:propTypes
@@ -25,9 +24,6 @@ export const ItemList = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    //@@viewOn:private
-    //@@viewOff:private
-
     const { data, dataItemResult, urlId } = props;
     const { handlerMap } = dataItemResult;
 
@@ -48,6 +44,7 @@ export const ItemList = createVisualComponent({
     };
     const handleItemComplete = async () => {
       await handlerMap.completeItem({ id: data.id, completed: !complete });
+      // await handlerMap.load({ listId: data.listId });
       setComplete(!complete);
     };
     //@@viewOn:render
@@ -110,9 +107,7 @@ export const ItemList = createVisualComponent({
         </div>
       ) : null;
     }
-
-    //@@viewOff:render
   },
 });
 
-export default ItemList;
+export default ItemListCompleted;

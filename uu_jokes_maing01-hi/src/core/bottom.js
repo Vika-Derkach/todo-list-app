@@ -2,7 +2,6 @@
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
 import { createVisualComponent } from "uu5g04-hooks";
-import Lsi from "../config/lsi.js";
 
 import Config from "./config/config.js";
 //@@viewOff:imports

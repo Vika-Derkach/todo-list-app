@@ -67,7 +67,7 @@ export const List = createVisualComponent({
       await handlerMap.update({ ...values, id: data.id });
       setEdit(!edit);
     };
-    // console.log("data", data);
+
     //@@viewOn:interface
     //@@viewOff:interface
 
@@ -122,29 +122,6 @@ export const List = createVisualComponent({
         </div>
       ) : null;
     }
-
-    // return currentNestingLevel ? (
-    //   <div {...attrs}>
-    //     {UU5.Utils.Content.getChildren(props.children, props, STATICS)}
-    //     {/* <div>{data.name}</div> */}
-    //     {/* <pre>
-    //       <code> {JSON.stringify(data, null, 4)}</code>
-    //     </pre> */}
-    //     <UU5.Bricks.Div className={list()}>
-    //       <UU5.Bricks.Text> {data.name}</UU5.Bricks.Text>
-
-    //       {/* <UU5.Bricks.Div>
-    //         <UU5.Bricks.Button colorSchema="red" onClick={handleListDelete}>
-    //           <UU5.Bricks.Icon icon="fa-trash" />
-    //         </UU5.Bricks.Button>
-
-    //         <UU5.Bricks.Button colorSchema="yellow" text="Edit" onClick={handleListUpdate}>
-    //           <UU5.Bricks.Icon icon="mdi-pencil" />
-    //         </UU5.Bricks.Button>
-    //       </UU5.Bricks.Div> */}
-    //     </UU5.Bricks.Div>
-    //   </div>
-    // ) : null;
 
     //@@viewOff:render
   },
