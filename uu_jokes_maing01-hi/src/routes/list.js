@@ -32,27 +32,23 @@ export const List = createVisualComponent({
     const url = UU5.Common.Url.parse(window.location.href);
     const urlId = url._parameters.id;
     console.log({ urlId });
-    const dataItemResult = useDataList(
-      {
-        handlerMap: {
-          load: Calls.listItem,
-          createItem: Calls.createItem,
-          update: Calls.updateItem,
-          delete: Calls.deleteItem,
-          setComplete: Calls.completeItem,
-        },
-        itemHandlerMap: {
-          load: Calls.getItem,
-          update: Calls.updateItem,
-          delete: Calls.deleteItem,
-        },
-        initialDtoIn: {
-          // listId: "60e7350bca31812058d50866",
-          listId: urlId,
-        },
-      }
-      // [urlId]
-    );
+    const dataItemResult = useDataList({
+      handlerMap: {
+        load: Calls.listItem,
+        createItem: Calls.createItem,
+        update: Calls.updateItem,
+        delete: Calls.deleteItem,
+        completeItem: Calls.completeItem,
+      },
+      itemHandlerMap: {
+        load: Calls.getItem,
+        update: Calls.updateItem,
+        delete: Calls.deleteItem,
+      },
+      initialDtoIn: {
+        listId: urlId,
+      },
+    });
 
     //@@viewOn:interface
     //@@viewOff:interface
@@ -65,12 +61,11 @@ export const List = createVisualComponent({
       }
     }, [urlId]);
     //@@viewOn:interface
-    //@@viewOff:interface\
+    //@@viewOff:interface
 
     const [text, setText] = useState("");
     const handleItemCreate = async (values) => {
       await handlerMap.createItem({ ...values, listId: urlId });
-
       setText("");
     };
     //@@viewOn:render
