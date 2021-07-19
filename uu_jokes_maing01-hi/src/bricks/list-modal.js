@@ -35,28 +35,22 @@ export const ListModal = createVisualComponentWithRef({
     useImperativeHandle(ref, () => ({
       openDeleteConfirm: (list, callback) => {
         modalRef.current.open({
-          header: list.name,
+          header: <></>,
           content: <DeleteListModalForm list={list} callback={callback} closeCallback={modalRef.current.close} />,
-          // className: main(),
         });
       },
       openCreateModal: (callback) => {
         modalRef.current.open({
           header: <UU5.Bricks.Header content="Create joke from " level="4" />,
           content: <CreateListModalForm callback={callback} closeCallback={modalRef.current.close} />,
-          // className: main(),
         });
       },
       openUpdateModal: (list, callback) => {
         modalRef.current.open({
           header: <UU5.Bricks.Header content="Update joke " level="4" />,
           content: <UpdateListModalForm list={list} callback={callback} closeCallback={modalRef.current.close} />,
-          // className: main(),
         });
       },
-      // close: () => {
-      //   modalRef.current.close();
-      // },
     }));
     //@@viewOff:hooks
 

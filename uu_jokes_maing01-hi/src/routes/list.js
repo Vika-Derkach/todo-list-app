@@ -15,17 +15,15 @@ const STATICS = {
   //@@viewOff:statics
 };
 const create_button = () => Config.Css.css`
-margin-bottom: 20px;
-
+  margin-bottom: 20px;
 `;
-
 const item_list = () => Config.Css.css`
-padding: 2%;
-background-color: rgba(1,42,74,255);
+  padding: 2%;
+  background-color: rgba(1,42,74,255);
 `;
 const showCompletedItemsBtn = () => Config.Css.css`
-margin-bottom: 20px;
-border-radius: 5px;
+  margin-bottom: 20px;
+  border-radius: 5px;
 `;
 
 export const List = createVisualComponent({
@@ -86,8 +84,9 @@ export const List = createVisualComponent({
     let textButtonComplete = show ? "Hide completed items" : "Show completed items";
 
     const CompleteItem = () => {
-      if (show) {
+      if (show && data?.length >= 0) {
         return data?.map(({ data }) => {
+          console.log("data", data);
           if (data.completed) {
             return (
               <ItemListCompleted
@@ -116,104 +115,52 @@ export const List = createVisualComponent({
     };
 
     //@@viewOn:render
-    const className = Config.Css.css``;
-    const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
-    const currentNestingLevel = UU5.Utils.NestingLevel.getNestingLevel(props, STATICS);
 
-    return currentNestingLevel ? (
-      <div {...attrs}>
-        <UU5.Bricks.Div className={item_list()}>
-          {/* <div>bla{STATICS.displayName}</div> */}
-          {/* <div>{JSON.stringify(data)}</div> */}
-          <UU5.Forms.TextButton
-            actionOnEnter={true}
-            placeholder="Add to do..."
-            // feedback="success"
-            // message="success message"
-            // required
-            value={text}
-            size="m"
-            className={create_button()}
-            onChange={(event) => setText(event.value)}
-            buttons={[
-              {
-                icon: "uu5-ok",
-                onClick: () => handleItemCreate({ ...data, text }),
-                colorSchema: "grey",
-              },
-            ]}
-          />
-          {data?.map(({ data }) => {
-            if (!data.completed) {
-              return <ItemList key={data.id} data={data} dataItemResult={dataItemResult} urlId={urlId} />;
-            }
-            // return JSON.stringify(data);
+    let someFunc = () => {
+      switch (state) {
+        case "ready":
+          return (
+            <UU5.Bricks.Div className={item_list()}>
+              <UU5.Forms.TextButton
+                actionOnEnter={true}
+                placeholder="Add to do..."
+                value={text}
+                size="m"
+                className={create_button()}
+                onChange={(event) => setText(event.value)}
+                buttons={[
+                  {
+                    icon: "uu5-ok",
+                    onClick: () => handleItemCreate({ ...data, text }),
+                    colorSchema: "grey",
+                  },
+                ]}
+              />
 
-            // id: data.id,
-            // content: data.name,
-            // href: `list?id=${data.id}`,
-          })}
-          <UU5.Bricks.Button className={showCompletedItemsBtn()} colorSchema="green" onClick={() => setShow(!show)}>
-            {textButtonComplete}
-          </UU5.Bricks.Button>
-          {CompleteItem()}
-        </UU5.Bricks.Div>
-        {() => {
-          switch (state) {
-            case "error":
-              return <UU5.Common.Error errorData={errorData} />;
-            case "ready":
-              return (
-                <>
-                  {/* {data?.map(({ data }) => {
-                    return JSON.stringify(data);
-                    // id: data.id,
-                    // content: data.name,
+              {data?.map(({ data }) => {
+                if (!data.completed) {
+                  return <ItemList key={data.id} data={data} dataItemResult={dataItemResult} urlId={urlId} />;
+                }
+              })}
+              <UU5.Bricks.Button className={showCompletedItemsBtn()} colorSchema="blue" onClick={() => setShow(!show)}>
+                {textButtonComplete}
+              </UU5.Bricks.Button>
+              {CompleteItem()}
+            </UU5.Bricks.Div>
+          );
 
-                    // href: `list?id=${data.id}`,
-                  })} */}
-                  {/* <div>dsfsdfs</div>
-                  {data?.map(
-                    ({ data }) => {
-                      return JSON.stringify(data[0].text);
-                      // id: data.id,
-                      // content: data.name,
+        case "error":
+          return <UU5.Bricks.Error />;
+        default:
+          return <Plus4U5.App.Loading />;
+      }
+    };
 
-                      // href: `list?id=${data.id}`,
-                    }
-                    // <JokeItem item={item} key={i} />
-
-                    // JSON.stringify(data)
-                  )}
-                  <div>{JSON.stringify(data)}</div>
-                  <Plus4U5.App.MenuTree
-                    borderBottom
-                    // NOTE Item "id" equals to useCase so that item gets automatically selected when route changes (see spa-autheticated.js).
-                    items={data?.map(
-                      ({ data }) => {
-                        return {
-                          id: data.id,
-                          // content: data.name,
-                          content: JSON.stringify(data.text),
-                          // href: `list?id=${data.id}`,
-                        };
-                      }
-                      // <JokeItem item={item} key={i} />
-
-                      // JSON.stringify(data)
-                    )}
-                  /> */}
-                </>
-              );
-
-            case "pending":
-              return <Plus4U5.App.Loading />;
-            default:
-              break;
-          }
-        }}
+    return (
+      <div>
+        <UU5.Bricks.Div>{someFunc()}</UU5.Bricks.Div>
       </div>
-    ) : null;
+    );
     //@@viewOff:render
   },
 });

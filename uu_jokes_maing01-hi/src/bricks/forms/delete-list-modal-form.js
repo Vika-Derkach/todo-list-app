@@ -11,12 +11,15 @@ const STATICS = {
   //@@viewOff:statics
 };
 const delete_form = () => Config.Css.css`
-text-align: center;
-margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 `;
 const delete_form_text = () => Config.Css.css`
-text-align: center;
-margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
+`;
+const button_cancel = () => Config.Css.css`
+  margin-right: 5px;
 `;
 export const DeleteListModalForm = createVisualComponent({
   ...STATICS,
@@ -60,8 +63,8 @@ export const DeleteListModalForm = createVisualComponent({
             <strong>Do you really want to delete {list.name} ?</strong>{" "}
           </UU5.Bricks.Text>
           <UU5.Bricks.Text className={delete_form_text()}> All items in the list will be alse deleted</UU5.Bricks.Text>
-          <UU5.Bricks.Button colorSchema="grey" onClick={closeCallback}>
-            <UU5.Bricks.Icon icon="fa-info" /> Cancel
+          <UU5.Bricks.Button colorSchema="grey" onClick={closeCallback} className={button_cancel()}>
+            Cancel
           </UU5.Bricks.Button>
           <UU5.Bricks.Button colorSchema="red" onClick={runDelete}>
             <UU5.Bricks.Icon icon="fa-trash" /> Delete

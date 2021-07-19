@@ -5,24 +5,23 @@ width: 78%;
 color: grey;
 `;
 const item_noncrossed_text = () => Config.Css.css`
-text-decoration: none;
-width: 78%;
+  text-decoration: none;
+  width: 78%;
 `;
 const item_box = () => Config.Css.css`
-display: flex;
-align-items: center;
-
-width: 100%
+  display: flex;
+  align-items: center;
+  width: 100%
 `;
 const item_veiw = () => Config.Css.css`
-margin-bottom: 10px;
-border-radius: 5%;
+  margin-bottom: 10px;
+  border-radius: 5%;
 `;
 const item_button = () => Config.Css.css`
-width: 10%;
+  width: 10%;
 `;
 const item_checkbox = () => Config.Css.css`
-width: 5%;
+  width: 5%;
 `;
 export default {
   item_crossed_text,

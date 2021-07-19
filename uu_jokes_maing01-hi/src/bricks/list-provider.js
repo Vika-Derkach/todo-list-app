@@ -43,7 +43,6 @@ export const ListProvider = createComponent({
       },
     });
     //@@viewOn:render
-    const className = Config.Css.css``;
 
     return <ListContext.Provider value={dataListResult}>{props.children}</ListContext.Provider>;
     //@@viewOff:render

@@ -1,12 +1,10 @@
 //@@viewOn:imports
 import UU5 from "uu5g04";
 import "uu5g04-bricks";
-import { createVisualComponent, useDataList, useEffect, useRef } from "uu5g04-hooks";
+import { createVisualComponent, useDataList, useRef } from "uu5g04-hooks";
 import Plus4U5 from "uu_plus4u5g01";
 import "uu_plus4u5g01-app";
-
 import Config from "./config/config.js";
-import Lsi from "../config/lsi.js";
 import Calls from "../calls";
 import ListLeft from "../bricks/list-left";
 import ListModal from "../bricks/list-modal.js";
@@ -18,10 +16,9 @@ const STATICS = {
   //@@viewOff:static
 };
 const create_list_button = () => Config.Css.css`
-margin-top: 10px;
-margin-bottom: 10px;
-text-align: center; 
-
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center; 
 `;
 export const Left = createVisualComponent({
   ...STATICS,
@@ -48,19 +45,12 @@ export const Left = createVisualComponent({
         delete: Calls.deleteList,
       },
     });
-    // const getListItem = async () => await Calls.listItem();
 
     //@@viewOn:interface
 
     //@@viewOff:interface
     //useDataList
     let { call, viewState, data, error, state } = dataListResult;
-
-    // if (data) {
-    //   Calls.listItem({ listId: data[0].data.id }).then((fsdfs) => {
-    //     console.log({ fsdfs });
-    //   });
-    // }
 
     const listRef = useRef();
 
@@ -90,20 +80,14 @@ export const Left = createVisualComponent({
       >
         {() => {
           switch (state) {
-            // case "error":
-            //   return <UU5.Common.Error errorData={errorData} />;
-            // case "pending":
-            //   return <Plus4U5.App.Loading />;
             case "ready":
               return (
                 <>
                   <Plus4U5.App.MenuTree
                     borderBottom
-                    // NOTE Item "id" equals to useCase so that item gets automatically selected when route changes (see spa-autheticated.js).
                     items={data?.map(({ data }) => {
                       return {
                         id: data.id,
-                        // content: data.name,
                         content: (
                           <ListLeft
                             key={data.id}
@@ -128,17 +112,12 @@ export const Left = createVisualComponent({
                   <ListModal ref={listRef} />
                 </>
               );
-            case "pendingNoData":
-              return <Plus4U5.App.Loading />;
+            case "error":
+              return <UU5.Bricks.Error />;
             default:
-              return <Plus4U5.Bricks.Error />;
+              return <Plus4U5.App.Loading />;
           }
         }}
-        {/* {data?.map((item, i) =>
-          // <JokeItem item={item} key={i} />
-
-          JSON.stringify(data)
-        )} */}
       </Plus4U5.App.Left>
     );
     //@@viewOff:render
