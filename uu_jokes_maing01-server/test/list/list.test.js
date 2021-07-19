@@ -73,6 +73,10 @@ describe(`Testing ${useCase} uuCmd...`, () => {
       expect(e.dtoOut.uuAppErrorMap).toBeDefined();
     }
   });
+
+  // TODO rev the first and this test are the same - HDS means
+  //  Happy Day Scenario (when everything is good),
+
   test("Everything is good", async () => {
     let session = await TestHelper.login("AwidLicenseOwner", false, false);
     const dtoIn = {

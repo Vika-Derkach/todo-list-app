@@ -4,6 +4,7 @@ const { UuObjectDao } = require("uu_appg01_server").ObjectStore;
 class ListMongo extends UuObjectDao {
   async createSchema() {
     await super.createIndex({ code: 1, awaid: 1 }, { unique: true });
+    // TODO rev: do not leave commented code
     // await super.createIndex({ awid: 1 }, { unique: true });
   }
 
