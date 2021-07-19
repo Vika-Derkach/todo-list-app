@@ -27,7 +27,7 @@ export const UpdateListModalForm = createVisualComponent({
     //@@viewOff:private
     const { list, callback, closeCallback } = props;
     //@@viewOn:private
-    //@@viewOff:private
+
     const handleUpdate = async ({ values, component }) => {
       component.setPending();
       try {
@@ -43,9 +43,7 @@ export const UpdateListModalForm = createVisualComponent({
       component.setReady();
       component.getAlertBus().clearAlerts();
     };
-
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOff:private
 
     //@@viewOn:render
     const className = Config.Css.css``;

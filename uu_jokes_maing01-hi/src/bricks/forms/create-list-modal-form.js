@@ -26,8 +26,8 @@ export const CreateListModalForm = createVisualComponent({
     //@@viewOn:private
     //@@viewOff:private
     const { callback, closeCallback } = props;
+
     //@@viewOn:private
-    //@@viewOff:private
     const handleCreate = async ({ values, component }) => {
       component.setPending();
       try {
@@ -44,8 +44,7 @@ export const CreateListModalForm = createVisualComponent({
 
       component.getAlertBus().clearAlerts();
     };
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOff:private
 
     //@@viewOn:render
     const className = Config.Css.css``;

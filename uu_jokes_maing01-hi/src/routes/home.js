@@ -45,12 +45,6 @@ export const Home = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    //@@viewOn:private
-    //@@viewOff:private
-
-    //@@viewOn:interface
-    //@@viewOff:interface
-
     //@@viewOn:render
     const attrs = UU5.Common.VisualComponent.getAttrs(props);
     return (

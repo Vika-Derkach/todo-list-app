@@ -25,13 +25,11 @@ export const ListModal = createVisualComponentWithRef({
   //@@viewOff:defaultProps
 
   render(props, ref) {
-    //@@viewOn:private
-    //@@viewOff:private
     //@@viewOn:hooks
     const modalRef = useRef();
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOff:hooks
 
+    //@@viewOn:interface
     useImperativeHandle(ref, () => ({
       openDeleteConfirm: (list, callback) => {
         modalRef.current.open({
@@ -52,10 +50,7 @@ export const ListModal = createVisualComponentWithRef({
         });
       },
     }));
-    //@@viewOff:hooks
-
-    //@@viewOn:private
-    //@@viewOff:private
+    //@@viewOff:interface
 
     //@@viewOn:render
     return <UU5.Bricks.Modal ref_={modalRef} />;

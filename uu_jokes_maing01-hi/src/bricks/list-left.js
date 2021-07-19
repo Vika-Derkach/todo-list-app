@@ -41,33 +41,33 @@ export const ListLeft = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    //@@viewOn:private
-    //@@viewOff:private
     const { data, dataListResult, openDeleteConfirm, openUpdateModal } = props;
     const { handlerMap, itemHandlerMap } = dataListResult;
+
+    //@viewOn:hooks
     const [name, setName] = useState(data.name);
     const [edit, setEdit] = useState(false);
+    //@viewOff:hooks
 
     let itemListLength;
 
     Calls.listItem({ listId: data.id }).then((el) => {
       itemListLength = el.itemList.length;
     });
-
+    //@@viewOn:private
     const handleListDeleteForce = (data) => {
       if (itemListLength <= 0) {
         handlerMap.delete({ id: data.id });
       } else {
         openDeleteConfirm(data, handlerMap.delete);
       }
-
-      // closeDetail();
     };
 
     const handleListUpdate = async (values) => {
       await handlerMap.update({ ...values, id: data.id });
       setEdit(!edit);
     };
+    //@@viewOff:private
 
     //@@viewOn:interface
     //@@viewOff:interface

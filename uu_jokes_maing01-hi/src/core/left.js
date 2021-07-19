@@ -31,7 +31,7 @@ export const Left = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    //@@viewOff:private
+
     const dataListResult = useDataList({
       handlerMap: {
         load: Calls.listList,
@@ -46,10 +46,6 @@ export const Left = createVisualComponent({
       },
     });
 
-    //@@viewOn:interface
-
-    //@@viewOff:interface
-    //useDataList
     let { call, viewState, data, error, state } = dataListResult;
 
     const listRef = useRef();
@@ -63,11 +59,9 @@ export const Left = createVisualComponent({
     function openUpdateModal(list, callback) {
       listRef.current.openUpdateModal(list, callback);
     }
-    // useEffect(() => {
-    //   call();
-    // }, []);
-    //@@viewOn:render
+    //@@viewOff:private
 
+    //@@viewOn:render
     return (
       <Plus4U5.App.Left
         {...props}
@@ -105,7 +99,7 @@ export const Left = createVisualComponent({
                   <UU5.Bricks.Div className={create_list_button()}>
                     <UU5.Bricks.Button colorSchema="blue" bgStyle="transparent" onClick={openCreateModal}>
                       <UU5.Bricks.Icon icon="uu5-plus" />
-                      Create
+                      Create list
                     </UU5.Bricks.Button>
                   </UU5.Bricks.Div>
 
@@ -115,7 +109,7 @@ export const Left = createVisualComponent({
             case "error":
               return <UU5.Bricks.Error />;
             default:
-              return <Plus4U5.App.Loading />;
+              return <UU5.Bricks.Loading />;
           }
         }}
       </Plus4U5.App.Left>

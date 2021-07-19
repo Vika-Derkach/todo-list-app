@@ -5,7 +5,6 @@ import Config from "./config/config";
 import Calls from "../calls";
 import ItemList from "../bricks/item-list";
 import ItemListCompleted from "../bricks/item-list-completed";
-
 //@@viewOff:imports
 
 const STATICS = {
@@ -19,7 +18,8 @@ const create_button = () => Config.Css.css`
 `;
 const item_list = () => Config.Css.css`
   padding: 2%;
-  background-color: rgba(1,42,74,255);
+  background: rgba(1,42,74,255);
+ 
 `;
 const showCompletedItemsBtn = () => Config.Css.css`
   margin-bottom: 20px;
@@ -39,8 +39,6 @@ export const List = createVisualComponent({
 
   render(props) {
     //@@viewOn:private
-    //@@viewOff:private
-
     const url = UU5.Common.Url.parse(window.location.href);
     const urlId = url._parameters.id;
 
@@ -61,26 +59,27 @@ export const List = createVisualComponent({
         listId: urlId,
       },
     });
-
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOff:private
 
     let { call, viewState, data, error, state, handlerMap, initialDtoIn } = dataItemResult;
+
+    //@viewOn:hooks
     const [show, setShow] = useState(false);
     useEffect(() => {
       if (typeof handlerMap.load === "function") {
         handlerMap.load({ listId: urlId });
       }
     }, [urlId]);
-    //@@viewOn:interface
-    //@@viewOff:interface
 
     const [text, setText] = useState("");
+    //@viewOff:hooks
+
+    //@@viewOn:private
     const handleItemCreate = async (values) => {
       await handlerMap.createItem({ ...values, listId: urlId });
       setText("");
     };
-
+    //@@viewOff:private
     let textButtonComplete = show ? "Hide completed items" : "Show completed items";
 
     const CompleteItem = () => {
@@ -120,7 +119,7 @@ export const List = createVisualComponent({
       switch (state) {
         case "ready":
           return (
-            <UU5.Bricks.Div className={item_list()}>
+            <UU5.Bricks.Div>
               <UU5.Forms.TextButton
                 actionOnEnter={true}
                 placeholder="Add to do..."
@@ -152,12 +151,12 @@ export const List = createVisualComponent({
         case "error":
           return <UU5.Bricks.Error />;
         default:
-          return <Plus4U5.App.Loading />;
+          return <UU5.Bricks.Loading />;
       }
     };
 
     return (
-      <div>
+      <div className={item_list()}>
         <UU5.Bricks.Div>{someFunc()}</UU5.Bricks.Div>
       </div>
     );

@@ -33,13 +33,11 @@ export const DeleteListModalForm = createVisualComponent({
   //@@viewOff:defaultProps
 
   render(props) {
-    //@@viewOn:private
-    //@@viewOff:private
-
     //@@viewOn:interface
     //@@viewOff:interface
     const { list, callback, closeCallback } = props;
 
+    //@@viewOn:private
     const runDelete = async () => {
       try {
         await callback({
@@ -50,6 +48,8 @@ export const DeleteListModalForm = createVisualComponent({
         closeCallback();
       }
     };
+    //@@viewOff:private
+
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);

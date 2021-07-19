@@ -1,5 +1,5 @@
 //@@viewOn:imports
-import UU5 from "uu5g04";
+
 import { createComponent, useDataList } from "uu5g04-hooks";
 import Config from "./config/config";
 
@@ -26,10 +26,7 @@ export const ListProvider = createComponent({
 
   render(props) {
     //@@viewOn:private
-    //@@viewOff:private
 
-    //@@viewOn:interface
-    //@@viewOff:interface
     const dataListResult = useDataList({
       handlerMap: {
         load: Calls.listList,
@@ -42,8 +39,9 @@ export const ListProvider = createComponent({
         delete: Calls.deleteList,
       },
     });
-    //@@viewOn:render
+    //@@viewOff:private
 
+    //@@viewOn:render
     return <ListContext.Provider value={dataListResult}>{props.children}</ListContext.Provider>;
     //@@viewOff:render
   },

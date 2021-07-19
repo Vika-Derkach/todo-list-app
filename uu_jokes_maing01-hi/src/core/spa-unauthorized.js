@@ -47,9 +47,6 @@ export const SpaUnauthorized = createVisualComponent({
     let { children } = props;
     //@@viewOff:private
 
-    //@@viewOn:interface
-    //@@viewOff:interface
-
     //@@viewOn:render
     const attrs = UU5.Common.VisualComponent.getAttrs(props, CLASS_NAMES.main());
     return (

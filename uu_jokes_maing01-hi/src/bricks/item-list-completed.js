@@ -26,17 +26,16 @@ export const ItemListCompleted = createVisualComponent({
   render(props) {
     const { data, dataItemResult, urlId } = props;
     const { handlerMap } = dataItemResult;
-
+    //@viewOn:hooks
     const [text, setText] = useState(data.text);
     const [edit, setEdit] = useState(false);
     const [complete, setComplete] = useState(data.completed);
+    //@viewOff:hooks
 
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOn:private
     const handleItemDelete = async () => {
       setEdit(!edit);
       await handlerMap.delete({ id: data.id });
-      // setEdit(!edit);
     };
     const handleItemUpdate = async (values) => {
       await handlerMap.update({ ...values, id: data.id, listId: urlId });
@@ -44,9 +43,11 @@ export const ItemListCompleted = createVisualComponent({
     };
     const handleItemComplete = async () => {
       await handlerMap.completeItem({ id: data.id, completed: !complete });
-      // await handlerMap.load({ listId: data.listId });
+
       setComplete(!complete);
     };
+    //@@viewOff:private
+
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
@@ -72,7 +73,6 @@ export const ItemListCompleted = createVisualComponent({
               {
                 icon: "uu5-ok",
                 onClick: () => handleItemUpdate({ ...data, text }),
-
                 colorSchema: "grey",
               },
             ]}
@@ -85,19 +85,12 @@ export const ItemListCompleted = createVisualComponent({
           <UU5.Bricks.Div className={Css.item_veiw()}>
             <UU5.Bricks.Box borderRadius="8px" className={Css.item_box()} colorSchema="grey">
               <UU5.Bricks.Div className={Css.item_checkbox()}>
-                <UU5.Forms.Checkbox
-                  value={complete}
-                  size="s"
-                  onChange={() => handleItemComplete()}
-                  labelPosition="center"
-                />
+                <UU5.Forms.Checkbox value={complete} size="s" onChange={() => handleItemComplete()} />
               </UU5.Bricks.Div>
               <UU5.Bricks.Div className={item_text}>
-                {" "}
                 <UU5.Bricks.Text>{text}</UU5.Bricks.Text>
               </UU5.Bricks.Div>
               <UU5.Bricks.Div className={Css.item_button()}>
-                {" "}
                 <UU5.Bricks.Button onClick={() => setEdit(true)}>
                   <UU5.Bricks.Icon icon="mdi-pencil" />
                 </UU5.Bricks.Button>
@@ -107,6 +100,7 @@ export const ItemListCompleted = createVisualComponent({
         </div>
       ) : null;
     }
+    //@@viewOff:render
   },
 });
 

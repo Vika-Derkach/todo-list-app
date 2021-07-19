@@ -75,9 +75,6 @@ export const About = createVisualComponent({
     let termsOfUse = useLsi(Lsi.about.termsOfUse);
     //@@viewOff:private
 
-    //@@viewOn:interface
-    //@@viewOff:interface
-
     //@@viewOn:render
     function getAuthors(authors) {
       return (

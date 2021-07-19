@@ -30,7 +30,7 @@ const ROUTES = {
   "sys/uuAppWorkspace/initUve": { component: <InitAppWorkspace /> },
   controlPanel: { component: <ControlPanel /> },
 };
-// linear-gradient(to right bottom, rgb(25, 118, 210) 0%, rgb(33, 150, 243) 100%)
+
 const app_top = () => Config.Css.css`
 background-color: rgb(33, 150, 243);
 `;
@@ -53,9 +53,6 @@ export const SpaAuthenticated = createVisualComponent({
       return url.parameters || DEFAULT_USE_CASE;
     });
     //@@viewOff:private
-
-    //@@viewOn:interface
-    //@@viewOff:interface
 
     //@@viewOn:render
     return (

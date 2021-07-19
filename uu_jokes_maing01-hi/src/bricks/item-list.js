@@ -31,17 +31,18 @@ export const ItemList = createVisualComponent({
     const { data, dataItemResult, urlId } = props;
     const { handlerMap } = dataItemResult;
 
+    //@viewOn:hooks
     const [text, setText] = useState(data.text);
     const [edit, setEdit] = useState(false);
     const [complete, setComplete] = useState(data.completed);
+    //@viewOff:hooks
 
-    //@@viewOn:interface
-    //@@viewOff:interface
+    //@@viewOn:private
     const handleItemDelete = async () => {
       setEdit(!edit);
       await handlerMap.delete({ id: data.id });
-      // setEdit(!edit);
     };
+
     const handleItemUpdate = async (values) => {
       await handlerMap.update({ ...values, id: data.id, listId: urlId });
       setEdit(!edit);
@@ -50,6 +51,8 @@ export const ItemList = createVisualComponent({
       await handlerMap.completeItem({ id: data.id, completed: !complete });
       setComplete(!complete);
     };
+    //@@viewOff:private
+
     //@@viewOn:render
     const className = Config.Css.css``;
     const attrs = UU5.Common.VisualComponent.getAttrs(props, className);
@@ -88,12 +91,7 @@ export const ItemList = createVisualComponent({
           <UU5.Bricks.Div className={Css.item_veiw()}>
             <UU5.Bricks.Box borderRadius="8px" className={Css.item_box()} colorSchema="grey">
               <UU5.Bricks.Div className={Css.item_checkbox()}>
-                <UU5.Forms.Checkbox
-                  value={complete}
-                  size="s"
-                  onChange={() => handleItemComplete()}
-                  labelPosition="center"
-                />
+                <UU5.Forms.Checkbox value={complete} size="s" onChange={() => handleItemComplete()} />
               </UU5.Bricks.Div>
               <UU5.Bricks.Div className={item_text}>
                 {" "}

@@ -43,9 +43,13 @@ export const InitAppWorkspace = createVisualComponent({
     //@@viewOn:private
     const routeLsi = useLsiValues(Lsi);
     const formRef = useRef();
+    //@viewOn:hooks
     let [initWorkspaceError, setInitWorkspaceError] = useState();
+    //@viewOff:hooks
+
     let { viewState, asyncData: data } = useData({ onLoad: Calls.loadIdentityProfiles });
 
+    //@@viewOn:private
     let handleSave = useCallback(async ({ component, values }) => {
       try {
         let originalUrl = new URLSearchParams(window.location.search).get("originalUrl");
