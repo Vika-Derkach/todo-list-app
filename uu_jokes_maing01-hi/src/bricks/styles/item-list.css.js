@@ -1,8 +1,8 @@
 import Config from "../config/config";
 const item_crossed_text = () => Config.Css.css`
-text-decoration: line-through;
-width: 78%;
-color: grey;
+   text-decoration: line-through;
+   width: 78%;
+   color: grey;
 `;
 const item_noncrossed_text = () => Config.Css.css`
   text-decoration: none;

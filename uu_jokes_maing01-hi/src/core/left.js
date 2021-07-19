@@ -75,6 +75,7 @@ export const Left = createVisualComponent({
       >
         {() => {
           switch (state) {
+            case "itemPending":
             case "ready":
               return (
                 <>

@@ -59,7 +59,6 @@ export const DeleteListModalForm = createVisualComponent({
       <div {...attrs}>
         <div className={delete_form()}>
           <UU5.Bricks.Text className={delete_form_text()}>
-            {" "}
             <strong>Do you really want to delete {list.name} ?</strong>{" "}
           </UU5.Bricks.Text>
           <UU5.Bricks.Text className={delete_form_text()}> All items in the list will be alse deleted</UU5.Bricks.Text>

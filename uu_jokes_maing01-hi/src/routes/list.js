@@ -19,7 +19,7 @@ const create_button = () => Config.Css.css`
 const item_list = () => Config.Css.css`
   padding: 2%;
   background: rgba(1,42,74,255);
- height: 100%;
+  height: 100%;
 `;
 const showCompletedItemsBtn = () => Config.Css.css`
   margin-bottom: 20px;
@@ -85,7 +85,6 @@ export const List = createVisualComponent({
     const CompleteItem = () => {
       if (show && data?.length >= 0) {
         return data?.map(({ data }) => {
-          console.log("data", data);
           if (data.completed) {
             return (
               <ItemListCompleted
