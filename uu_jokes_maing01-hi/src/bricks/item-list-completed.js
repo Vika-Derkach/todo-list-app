@@ -66,14 +66,14 @@ export const ItemListCompleted = createVisualComponent({
               {
                 icon: "plus4u5-trash-can",
                 onClick: () => handleItemDelete(),
-                colorSchema: "info",
+                colorSchema: "grey",
               },
 
               {
                 icon: "uu5-ok",
                 onClick: () => handleItemUpdate({ ...data, text }),
 
-                colorSchema: "info",
+                colorSchema: "grey",
               },
             ]}
           />

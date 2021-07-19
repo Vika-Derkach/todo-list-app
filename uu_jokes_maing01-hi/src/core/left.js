@@ -55,7 +55,7 @@ export const Left = createVisualComponent({
     //@@viewOff:interface
     //useDataList
     let { call, viewState, data, error, state } = dataListResult;
-    console.log({ datagfh: data });
+
     // if (data) {
     //   Calls.listItem({ listId: data[0].data.id }).then((fsdfs) => {
     //     console.log({ fsdfs });
@@ -90,8 +90,10 @@ export const Left = createVisualComponent({
       >
         {() => {
           switch (state) {
-            case "error":
-              return <UU5.Common.Error errorData={errorData} />;
+            // case "error":
+            //   return <UU5.Common.Error errorData={errorData} />;
+            // case "pending":
+            //   return <Plus4U5.App.Loading />;
             case "ready":
               return (
                 <>
@@ -126,11 +128,10 @@ export const Left = createVisualComponent({
                   <ListModal ref={listRef} />
                 </>
               );
-
-            case "pending":
+            case "pendingNoData":
               return <Plus4U5.App.Loading />;
             default:
-              break;
+              return <Plus4U5.Bricks.Error />;
           }
         }}
         {/* {data?.map((item, i) =>

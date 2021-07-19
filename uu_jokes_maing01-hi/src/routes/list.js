@@ -100,7 +100,16 @@ export const List = createVisualComponent({
           }
         });
       } else if (data?.length <= 0) {
-        return <div>there is no completed things</div>;
+        return (
+          <UU5.Bricks.Div>
+            <UU5.Bricks.Box borderRadius="8px" colorSchema="grey">
+              <UU5.Bricks.Div>
+                {" "}
+                <UU5.Bricks.Text>There is no completed things</UU5.Bricks.Text>
+              </UU5.Bricks.Div>
+            </UU5.Bricks.Box>
+          </UU5.Bricks.Div>
+        );
       } else {
         return <div></div>;
       }

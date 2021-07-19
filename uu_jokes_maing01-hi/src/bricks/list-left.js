@@ -55,6 +55,7 @@ export const ListLeft = createVisualComponent({
     const [edit, setEdit] = useState(false);
 
     let itemListLength;
+
     Calls.listItem({ listId: data.id }).then((el) => {
       itemListLength = el.itemList.length;
     });
@@ -68,12 +69,7 @@ export const ListLeft = createVisualComponent({
 
       // closeDetail();
     };
-    console.log("sss", data);
-    // const handleListUpdate = useCallback((item) => {
-    //   openUpdateModal(data, handlerMap.update);
 
-    //   // closeDetail();
-    // }, []);
     const handleListUpdate = async (values) => {
       await handlerMap.update({ ...values, id: data.id });
       setEdit(!edit);
@@ -118,12 +114,10 @@ export const ListLeft = createVisualComponent({
           <UU5.Bricks.Div className={list_veiw()}>
             <UU5.Bricks.Box bgStyle="filled" colorSchema="blue" className={list_box()}>
               <UU5.Bricks.Div className={list_text()}>
-                {" "}
                 <UU5.Bricks.Text>{name}</UU5.Bricks.Text>
               </UU5.Bricks.Div>
 
               <UU5.Bricks.Div className={list_button()}>
-                {" "}
                 <UU5.Bricks.Button onClick={() => setEdit(true)}>
                   <UU5.Bricks.Icon icon="mdi-pencil" />
                 </UU5.Bricks.Button>
