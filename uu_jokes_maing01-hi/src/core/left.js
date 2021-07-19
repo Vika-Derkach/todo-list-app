@@ -18,7 +18,8 @@ const STATICS = {
 const create_list_button = () => Config.Css.css`
   margin-top: 10px;
   margin-bottom: 10px;
-  text-align: center; 
+  text-align: left; 
+  margin-left: 10px;
 `;
 export const Left = createVisualComponent({
   ...STATICS,

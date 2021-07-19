@@ -26,7 +26,7 @@ export const About = {
       ],
       en: [
         {
-          name: "Name Surname",
+          name: "Viktoria Derkach",
           uri: "https://www.unicorn.com/",
         },
       ],
@@ -50,8 +50,8 @@ export const About = {
   ],
   otherAuthors: [
     {
-      name: "Your Name",
-      uuIdentity: "4-4-1",
+      name: "Vika",
+      uuIdentity: "8856-7737-1",
       role: {
         en: "Developer",
       },

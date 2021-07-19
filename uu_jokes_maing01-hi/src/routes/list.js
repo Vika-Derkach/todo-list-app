@@ -19,7 +19,7 @@ const create_button = () => Config.Css.css`
 const item_list = () => Config.Css.css`
   padding: 2%;
   background: rgba(1,42,74,255);
- 
+ height: 100%;
 `;
 const showCompletedItemsBtn = () => Config.Css.css`
   margin-bottom: 20px;
@@ -117,6 +117,7 @@ export const List = createVisualComponent({
 
     let someFunc = () => {
       switch (state) {
+        case "itemPending":
         case "ready":
           return (
             <UU5.Bricks.Div>

@@ -3,6 +3,7 @@ import UU5 from "uu5g04";
 import { createVisualComponent, useState } from "uu5g04-hooks";
 import Config from "./config/config";
 import Calls from "../calls";
+import Css from "../bricks/styles/list-left.css";
 //@@viewOff:imports
 
 const STATICS = {
@@ -11,23 +12,6 @@ const STATICS = {
   nestingLevel: "bigBoxCollection",
   //@@viewOff:statics
 };
-
-const list_box = () => Config.Css.css`
-  display: flex;
-  align-items: center;
-  width: 100%
-`;
-const list_veiw = () => Config.Css.css`
-  margin-top: 10px;
-  margin-bottom: 10px;
-  border-radius: 5%;
-`;
-const list_button = () => Config.Css.css`
-  width: 10%
-`;
-const list_text = () => Config.Css.css`
-  width: 80%
-`;
 
 export const ListLeft = createVisualComponent({
   ...STATICS,
@@ -105,14 +89,14 @@ export const ListLeft = createVisualComponent({
     } else {
       return currentNestingLevel ? (
         <div {...attrs}>
-          <UU5.Bricks.Div className={list_veiw()}>
-            <UU5.Bricks.Div bgStyle="transparent" className={list_box()}>
-              <UU5.Bricks.Div className={list_text()}>
+          <UU5.Bricks.Div className={Css.list_veiw()}>
+            <UU5.Bricks.Div bgStyle="transparent" className={Css.list_box()}>
+              <UU5.Bricks.Div className={Css.list_text()}>
                 <UU5.Bricks.Text>{name}</UU5.Bricks.Text>
               </UU5.Bricks.Div>
 
-              <UU5.Bricks.Div className={list_button()}>
-                <UU5.Bricks.Button onClick={() => setEdit(true)}>
+              <UU5.Bricks.Div className={Css.list_button()}>
+                <UU5.Bricks.Button colorSchema="blue" onClick={() => setEdit(true)}>
                   <UU5.Bricks.Icon icon="mdi-pencil" />
                 </UU5.Bricks.Button>
               </UU5.Bricks.Div>
